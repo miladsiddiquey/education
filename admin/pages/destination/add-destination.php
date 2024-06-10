@@ -113,6 +113,22 @@
               <span class="menu-title">Form Elements</span>
             </a>
           </li>
+                   <!-- Destination post -->
+                   <li class="nav-item menu-items">
+            <a class="nav-link" data-toggle="collapse" href="#des_post" aria-expanded="false" aria-controls="ui-basic">
+              <span class="menu-icon">
+                <i class="mdi mdi-laptop"></i>
+              </span>
+              <span class="menu-title">Destination Post</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="des_post">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="add-destination.php">Add Destination</a></li>
+                <li class="nav-item"> <a class="nav-link" href="#">List Destination</a></li>
+              </ul>
+            </div>
+          </li>
           <li class="nav-item menu-items">
             <a class="nav-link" href="../../pages/tables/basic-table.php">
               <span class="menu-icon">
@@ -376,30 +392,20 @@
               <div class="col-12 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
-                    <h4 class="card-title">Basic form elements</h4>
+                    <h4 class="card-title">Destination Post</h4>
                     <p class="card-description"> Basic form elements </p>
                     <form class="forms-sample">
                       <div class="form-group">
-                        <label for="exampleInputName1">Name</label>
-                        <input type="text" class="form-control" id="exampleInputName1" placeholder="Name">
+                        <label for="exampleInputName1">Title</label>
+                        <input type="text" class="form-control" id="exampleInputName1" placeholder="Title">
                       </div>
                       <div class="form-group">
-                        <label for="exampleInputEmail3">Email address</label>
-                        <input type="email" class="form-control" id="exampleInputEmail3" placeholder="Email">
+                        <label for="exampleInputEmail3">Paragraph</label>
+                        <input type="text" class="form-control" id="exampleInputEmail3" placeholder="Paragraph">
                       </div>
+                      
                       <div class="form-group">
-                        <label for="exampleInputPassword4">Password</label>
-                        <input type="password" class="form-control" id="exampleInputPassword4" placeholder="Password">
-                      </div>
-                      <div class="form-group">
-                        <label for="exampleSelectGender">Gender</label>
-                        <select class="form-control" id="exampleSelectGender">
-                          <option>Male</option>
-                          <option>Female</option>
-                        </select>
-                      </div>
-                      <div class="form-group">
-                        <label>File upload</label>
+                        <label>Image upload</label>
                         <input type="file" name="img[]" class="file-upload-default">
                         <div class="input-group col-xs-12">
                           <input type="text" class="form-control file-upload-info" disabled placeholder="Upload Image">
@@ -408,16 +414,9 @@
                           </span>
                         </div>
                       </div>
-                      <div class="form-group">
-                        <label for="exampleInputCity1">City</label>
-                        <input type="text" class="form-control" id="exampleInputCity1" placeholder="Location">
-                      </div>
-                      <div class="form-group">
-                        <label for="exampleTextarea1">Textarea</label>
-                        <textarea class="form-control" id="exampleTextarea1" rows="4"></textarea>
-                      </div>
+                      
                       <button type="submit" class="btn btn-primary mr-2">Submit</button>
-                      <button class="btn btn-dark">Cancel</button>
+
                     </form>
                   </div>
                 </div>

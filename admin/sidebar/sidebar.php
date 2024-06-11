@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -82,7 +83,7 @@
             <span class="nav-link">Navigation</span>
           </li>
           <li class="nav-item menu-items">
-            <a class="nav-link" href="../../index.php">
+            <a class="nav-link" href="#">
               <span class="menu-icon">
                 <i class="mdi mdi-speedometer"></i>
               </span>
@@ -124,13 +125,13 @@
             </a>
             <div class="collapse" id="des_post">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="add-destination.php">Add Destination</a></li>
-                <li class="nav-item"> <a class="nav-link" href="#">List Destination</a></li>
+              <li class="nav-item"> <a class="nav-link" href="../admin/pages/destination/add-destination.php">Add Destination</a></li>
+              <li class="nav-item"> <a class="nav-link" href="../admin/pages/destination/list-destination.php">List Destination</a></li>
               </ul>
             </div>
           </li>
           <li class="nav-item menu-items">
-            <a class="nav-link" href="../../pages/tables/basic-table.php">
+            <a class="nav-link" href="<?php echo $base_url ?>/pages/tables/basic-table.php">
               <span class="menu-icon">
                 <i class="mdi mdi-table-large"></i>
               </span>
@@ -376,84 +377,6 @@
             </button>
           </div>
         </nav>
-        <!-- partial -->
-        <div class="main-panel">
-          <div class="content-wrapper">
-            <div class="page-header">
-              <h3 class="page-title"> Form elements </h3>
-              <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                  <li class="breadcrumb-item"><a href="#">Forms</a></li>
-                  <li class="breadcrumb-item active" aria-current="page">Form elements</li>
-                </ol>
-              </nav>
-            </div>
-            <div class="row">
-              <div class="col-12 grid-margin stretch-card">
-                <div class="card">
-                  <div class="card-body">
-                    <h4 class="card-title">Destination Post</h4>
-                    <p class="card-description"> Basic form elements </p>
-                    <!-- post form -->
-<?php
-if(isset($_POST['submit'])){
-  include "../../../admin/config.php";
-  $title =mysqli_real_escape_string($con, $_POST['title']);
-  $para =mysqli_real_escape_string($con, $_POST['paragraph']);
-  $filename = $_FILES['image']['name'];
-  $tempfile = $_FILES['image']['tmp_name'];
-  $folder = "../../../uploade-images/".$filename;
-  
-  $sql = "INSERT INTO `destinationpost`(`title`,`paragraph`,`image`)VALUES('$title','$para','$filename') ";
-  $result  =mysqli_query($con, $sql);
-  move_uploaded_file($tempfile,$folder);
-
-}
-?>
-
-                    <form class="forms-sample" action="add-destination.php" method="post" enctype="multipart/form-data" >
-                      <div class="form-group">
-                        <label for="exampleInputName1">Title</label>
-                        <input type="text" name="title" class="form-control" id="exampleInputName1" placeholder="Title">
-                      </div>
-                      <div class="form-group">
-                        <label for="exampleInputEmail3">Paragraph</label>
-                        <input type="text" name="paragraph" class="form-control" id="exampleInputEmail3" placeholder="Paragraph">
-                      </div>
-                      <div class="form-group">
-                        <label for="exampleInputEmail3">Paragraph</label>
-                        <input type="file" name="image" class="form-control" id="exampleInputEmail3" placeholder="Paragraph">
-                      </div>
-                      <!-- <div class="form-group">
-                        <label>Image upload</label>
-                        <input type="file" name="image" class="file-upload-default">
-                        <div class="input-group col-xs-12">
-                          <input type="file" name="image" class="form-control file-upload-info" disabled placeholder="Upload Image">
-                          <span class="input-group-append">
-                            <button class="file-upload-browse btn btn-primary" type="submit" name="submit">Upload</button>
-                          </span>
-                        </div>
-                      </div> -->
-                      
-                      <button type="submit" name="submit" class="btn btn-primary mr-2">Submit</button>
-
-                    </form>
-
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- content-wrapper ends -->
-          <!-- partial:../../partials/_footer.php -->
-          <footer class="footer">
-            <div class="d-sm-flex justify-content-center justify-content-sm-between">
-              <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright © bootstrapdash.com 2020</span>
-              <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Free <a href="https://www.bootstrapdash.com/bootstrap-admin-template/" target="_blank">Bootstrap admin templates</a> from Bootstrapdash.com</span>
-            </div>
-          </footer>
-          <!-- partial -->
-        </div>
         <!-- main-panel ends -->
       </div>
       <!-- page-body-wrapper ends -->

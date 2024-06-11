@@ -126,8 +126,8 @@
             </a>
             <div class="collapse" id="des_post">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="pages/destination/add-destination.php">Add Destination</a></li>
-                <li class="nav-item"> <a class="nav-link" href="#">List Destination</a></li>
+                <li class="nav-item"> <a class="nav-link" href="../admin/pages/destination/add-destination.php">Add Destination</a></li>
+                <li class="nav-item"> <a class="nav-link" href="../admin/pages/destination/list-destination.php">List Destination</a></li>
               </ul>
             </div>
           </li>

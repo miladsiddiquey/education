@@ -125,7 +125,7 @@
             <div class="collapse" id="des_post">
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item"> <a class="nav-link" href="add-destination.php">Add Destination</a></li>
-                <li class="nav-item"> <a class="nav-link" href="#">List Destination</a></li>
+                <li class="nav-item"> <a class="nav-link" href="list-destination.php">List Destination</a></li>
               </ul>
             </div>
           </li>
@@ -407,6 +407,21 @@ if(isset($_POST['submit'])){
   $sql = "INSERT INTO `destinationpost`(`title`,`paragraph`,`image`)VALUES('$title','$para','$filename') ";
   $result  =mysqli_query($con, $sql);
   move_uploaded_file($tempfile,$folder);
+
+  if($result){
+    ?>
+    <script>
+    alert("data added successfully")
+    window.open('http://localhost/education/admin/pages/destination/list-destination.php','_self');
+    </script>
+    <?php
+}else{
+    ?>
+    <script>
+    alert("Please try again")
+    </script>
+    <?php
+}
 
 }
 ?>

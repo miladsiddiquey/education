@@ -421,11 +421,11 @@
                             <td> <?php echo $row['id']; ?> </td>
                             <td> <?php echo $row['title']; ?> </td>
                             <td><?php echo $row['paragraph']; ?> </td>
-                            <td> <?php echo $row['image']; ?>  </td>
+                            <td> <img src="<?php echo "../../../uploade-images/" .$row['image']; ?>" style = "width: 35px; height: 35px; border-radius: 0;" alt=""> </td>
                             <td> 
                             
                             <a href="./edit-destination.php ?id=<?php echo $row['id'];?>" style="font-size: 20px; padding-right: 10px;"><i class="mdi mdi-lead-pencil"></i></a>
-                            <a onclick="return confirm('Are you sure')" href="./delate-destination.php ?id=<?php echo $row['id'];?>" style="font-size: 20px; padding-left: 10px;"><i class="mdi mdi-delete"></i></a>
+                            <a onclick="return confirm('Are you sure!')" href="./delate-destination.php ?id=<?php echo $row['id'];?>" style="font-size: 20px; padding-left: 10px;"><i class="mdi mdi-delete"></i></a>
                             </td>
                           </tr>
                         </tbody>

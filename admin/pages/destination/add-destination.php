@@ -129,6 +129,23 @@
               </ul>
             </div>
           </li>
+   <!-- Team Members -->
+          <li class="nav-item menu-items">
+            <a class="nav-link" data-toggle="collapse" href="#team-member" aria-expanded="false" aria-controls="ui-basic">
+              <span class="menu-icon">
+                <i class="mdi mdi-laptop"></i>
+              </span>
+              <span class="menu-title">Team Members</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="team-member">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="../team/add-team.php">Add Members</a></li>
+                <li class="nav-item"> <a class="nav-link" href="../team/list-team.php">List Members</a></li>
+              </ul>
+            </div>
+          </li>
+
           <li class="nav-item menu-items">
             <a class="nav-link" href="../../pages/tables/basic-table.php">
               <span class="menu-icon">
@@ -433,7 +450,7 @@ if(isset($_POST['submit'])){
                       </div>
                       <div class="form-group">
                         <label for="exampleInputEmail3">Paragraph</label>
-                        <input type="text" name="paragraph" class="form-control" id="exampleInputEmail3" placeholder="Paragraph">
+                        <textarea type="text" name="paragraph" class="form-control" id="exampleInputEmail3"  rows="5"></textarea>
                       </div>
                       <div class="form-group">
                         <label for="exampleInputEmail3">Paragraph</label>

@@ -124,8 +124,24 @@
             </a>
             <div class="collapse" id="des_post">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="add-destination.php">Add Destination</a></li>
-                <li class="nav-item"> <a class="nav-link" href="list-destination.php">List Destination</a></li>
+                <li class="nav-item"> <a class="nav-link" href="../destination/add-destination.php">Add Destination</a></li>
+                <li class="nav-item"> <a class="nav-link" href="../destination/list-destination.php">List Destination</a></li>
+              </ul>
+            </div>
+          </li>
+          <!-- Team Members -->
+          <li class="nav-item menu-items">
+            <a class="nav-link" data-toggle="collapse" href="#team-member" aria-expanded="false" aria-controls="ui-basic">
+              <span class="menu-icon">
+                <i class="mdi mdi-laptop"></i>
+              </span>
+              <span class="menu-title">Team Members</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="team-member">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="./add-team.php">Add Members</a></li>
+                <li class="nav-item"> <a class="nav-link" href="./list-team.php">List Members</a></li>
               </ul>
             </div>
           </li>
@@ -392,7 +408,7 @@
             <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
-                    <h4 class="card-title">Bordered table</h4>
+                    <h4 class="card-title">Member List</h4>
                     <p class="card-description"> Add class <code>.table-bordered</code>
                     </p>
                     
@@ -401,15 +417,15 @@
                         <thead>
                           <tr>
                             <th> # </th>
-                            <th> Title </th>
-                            <th> Paragraph </th>
+                            <th> Name </th>
+                            <th> Description </th>
                             <th> Image </th>
                             <th> Action </th>
                           </tr>
                           </thead>
                           <?php 
                     include '../../config.php';
-                    $sql = "SELECT * FROM destinationpost";
+                    $sql = "SELECT * FROM team";
                     $data = mysqli_query($con, $sql);
                     $result = mysqli_num_rows($data);
 
@@ -419,8 +435,8 @@
                         <tbody>
                           <tr>
                             <td> <?php echo $row['id']; ?> </td>
-                            <td> <?php echo $row['title']; ?> </td>
-                            <td><?php echo substr($row['paragraph'],60); ?> </td>
+                            <td> <?php echo $row['name']; ?> </td>
+                            <td><?php echo $row['description']; ?> </td>
                             <td> <img src="<?php echo "../../../uploade-images/" .$row['image']; ?>" style = "width: 35px; height: 35px; border-radius: 0;" alt=""> </td>
                             <td> 
                             <a href="./edit-destination.php ?id=<?php echo $row['id'];?>" style="font-size: 20px; padding-right: 10px;"><i class="mdi mdi-lead-pencil"></i></a>

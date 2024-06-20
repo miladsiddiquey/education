@@ -226,74 +226,33 @@
         </div>
 
         <div class="home-destination-content">
+          <?php 
+                    include './admin/config.php';
+                    $sql = "SELECT * FROM destinationpost";
+                    $data = mysqli_query($con, $sql);
+                    $result = mysqli_num_rows($data);
+
+                    if($result){
+                        while($row=mysqli_fetch_array($data)){
+                            ?>
           <div class="home-destination-slide">
             <div class="card-box">
               <div class="card-box-img">
-                <img src="img/post1.png" alt="img" />
+                <img src="<?php echo "./uploade-images/" .$row['image']; ?>" alt="img" />
               </div>
               <div class="card-box-text">
-                <h4>Study in AUSTRALIA</h4>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore.
-                </p>
+                <h4><?php echo $row['title']; ?></h4>
+                <p><?php echo $row['paragraph']; ?> </p>
                 <a href="#"
                   >Learn More <i class="fa-solid fa-arrow-right"></i
                 ></a>
               </div>
             </div>
           </div>
-          <div class="home-destination-slide">
-            <div class="card-box">
-              <div class="card-box-img">
-                <img src="img/post1.png" alt="img" />
-              </div>
-              <div class="card-box-text">
-                <h4>Study in AUSTRALIA</h4>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore.
-                </p>
-                <a href="#"
-                  >Learn More <i class="fa-solid fa-arrow-right"></i
-                ></a>
-              </div>
-            </div>
-          </div>
-          <div class="home-destination-slide">
-            <div class="card-box">
-              <div class="card-box-img">
-                <img src="img/post1.png" alt="img" />
-              </div>
-              <div class="card-box-text">
-                <h4>Study in AUSTRALIA</h4>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore.
-                </p>
-                <a href="#"
-                  >Learn More <i class="fa-solid fa-arrow-right"></i
-                ></a>
-              </div>
-            </div>
-          </div>
-          <div class="home-destination-slide">
-            <div class="card-box">
-              <div class="card-box-img">
-                <img src="img/post1.png" alt="img" />
-              </div>
-              <div class="card-box-text">
-                <h4>Study in AUSTRALIA</h4>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore.
-                </p>
-                <a href="#"
-                  >Learn More <i class="fa-solid fa-arrow-right"></i
-                ></a>
-              </div>
-            </div>
-          </div>
+          <?php
+                        }
+                    }
+                    ?>     
         </div>
       </div>
     </div>

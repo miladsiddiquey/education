@@ -147,6 +147,40 @@
               </ul>
             </div>
           </li>
+          <!-- client review  -->
+        <!-- Team Members -->
+<li class="nav-item menu-items">
+            <a class="nav-link" data-toggle="collapse" href="#cl_review" aria-expanded="false" aria-controls="ui-basic">
+              <span class="menu-icon">
+                <i class="mdi mdi-laptop"></i>
+              </span>
+              <span class="menu-title">Client Review</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="cl_review">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="./pages/review/add-review.php">Add Review</a></li>
+                <li class="nav-item"> <a class="nav-link" href="./pages/review/list-review.php">List Review</a></li>
+              </ul>
+            </div>
+          </li>
+          <!-- faq  -->
+          <li class="nav-item menu-items">
+            <a class="nav-link" data-toggle="collapse" href="#faq" aria-expanded="false" aria-controls="ui-basic">
+              <span class="menu-icon">
+                <i class="mdi mdi-laptop"></i>
+              </span>
+              <span class="menu-title">FAQ</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="faq">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="./pages/faq/add-faq.php">Add Faq</a></li>
+                <li class="nav-item"> <a class="nav-link" href="./pages/faq/list-faq.php">List Faq</a></li>
+              </ul>
+            </div>
+          </li>
+
           <li class="nav-item menu-items">
             <a class="nav-link" href="pages/tables/basic-table.php">
               <span class="menu-icon">

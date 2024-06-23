@@ -125,7 +125,7 @@
             <div class="collapse" id="des_post">
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item"> <a class="nav-link" href="../destination/add-destination.php">Add Destination</a></li>
-                <li class="nav-item"> <a class="nav-link" href="../destination/list-destination.php">List Destination</a></li>
+                <li class="nav-item"> <a class="nav-link" href="../destination/add-destination.php">List Destination</a></li>
               </ul>
             </div>
           </li>
@@ -408,7 +408,7 @@
             <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
-                    <h4 class="card-title">Member List</h4>
+                    <h4 class="card-title">Bordered table</h4>
                     <p class="card-description"> Add class <code>.table-bordered</code>
                     </p>
                     
@@ -439,8 +439,8 @@
                             <td><?php echo $row['description']; ?> </td>
                             <td> <img src="<?php echo "../../../uploade-images/" .$row['image']; ?>" style = "width: 35px; height: 35px; border-radius: 0;" alt=""> </td>
                             <td> 
-                            <a href="./edit-destination.php ?id=<?php echo $row['id'];?>" style="font-size: 20px; padding-right: 10px;"><i class="mdi mdi-lead-pencil"></i></a>
-                            <a onclick="return confirm('Are you sure!')" href="./delate-destination.php ?id=<?php echo $row['id'];?>" style="font-size: 20px; padding-left: 10px;"><i class="mdi mdi-delete"></i></a>
+                            <a href="./edit-team.php ?id=<?php echo $row['id'];?>" style="font-size: 20px; padding-right: 10px;"><i class="mdi mdi-lead-pencil"></i></a>
+                            <a onclick="return confirm('Are you sure!')" href="./delate-team.php ?id=<?php echo $row['id'];?>" style="font-size: 20px; padding-left: 10px;"><i class="mdi mdi-delete"></i></a>
                             </td>
                           </tr>
                         </tbody>

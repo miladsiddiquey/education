@@ -124,8 +124,8 @@
             </a>
             <div class="collapse" id="des_post">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="../destination/add-destination.php">Add Destination</a></li>
-                <li class="nav-item"> <a class="nav-link" href="../destination/list-destination.php">List Destination</a></li>
+                <li class="nav-item"> <a class="nav-link" href="add-destination.php">Add Destination</a></li>
+                <li class="nav-item"> <a class="nav-link" href="list-destination.php">List Destination</a></li>
               </ul>
             </div>
           </li>
@@ -140,8 +140,8 @@
             </a>
             <div class="collapse" id="team-member">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="./add-team.php">Add Members</a></li>
-                <li class="nav-item"> <a class="nav-link" href="./list-team.php">List Members</a></li>
+                <li class="nav-item"> <a class="nav-link" href="../team/add-team.php">Add Members</a></li>
+                <li class="nav-item"> <a class="nav-link" href="../team/list-team.php">List Members</a></li>
               </ul>
             </div>
           </li>
@@ -415,16 +415,22 @@
 <?php
 if(isset($_POST['submit'])){
   include "../../config.php";
-  $question =mysqli_real_escape_string($con, $_POST['question']);
-  $answer =mysqli_real_escape_string($con, $_POST['answer']);
-  $sql = "INSERT INTO `question`(`question`,`answer`)VALUES('$question','$answer') ";
+  $title =mysqli_real_escape_string($con, $_POST['title']);
+  $para =mysqli_real_escape_string($con, $_POST['paragraph']);
+  $category=mysqli_real_escape_string($con, $_POST['category']);
+  $filename = $_FILES['image']['name'];
+  $tempfile = $_FILES['image']['tmp_name'];
+  $folder = "../../../uploade-images/".$filename;
+  
+  $sql = "INSERT INTO `allcolleges`(`title`,`paragraph`,`category`,`image`)VALUES('$title','$para','$category','$filename') ";
   $result  =mysqli_query($con, $sql);
+  move_uploaded_file($tempfile,$folder);
 
   if($result){
     ?>
     <script>
-    alert("FAQ added successfully")
-    window.open('http://localhost/education/admin/pages/faq/list-faq.php','_self');
+    alert("data added successfully")
+    window.open('http://localhost/education/admin/pages/allcolleges/list-col.php','_self');
     </script>
     <?php
 }else{
@@ -438,15 +444,31 @@ if(isset($_POST['submit'])){
 }
 ?>
 
-                    <form class="forms-sample" action="add-faq.php" method="post">
+                    <form class="forms-sample" action="add-col.php" method="post" enctype="multipart/form-data" >
                       <div class="form-group">
-                        <label for="exampleInputName1">Question</label>
-                        <input type="text" name="question" class="form-control" id="exampleInputName1" placeholder="Question">
+                        <label for="exampleInputName1">Title</label>
+                        <input type="text" name="title" class="form-control" id="exampleInputName1" placeholder="Title">
                       </div>
                       <div class="form-group">
-                        <label for="exampleInputEmail3">Answer</label>
-                        <textarea type="text" name="answer" class="form-control" id="exampleInputEmail3"  rows="3"></textarea>
+                        <label for="exampleInputEmail3">Paragraph</label>
+                        <textarea type="text" name="paragraph" class="form-control" id="exampleInputEmail3"  rows="5"></textarea>
                       </div>
+                      <div class="form-group">
+                            <label >Category</label>
+                            <div class="col-sm-3">
+                              <select class="form-control" name="category">
+                                <option value="college">College</option>
+                                <option value="university">University</option>
+                                <option value="province">Province</option>
+                              </select>
+                            </div>
+                          </div>
+                      <div class="form-group">
+                        <label for="exampleInputEmail3">image</label>
+                        <input type="file" name="image" class="form-control" id="exampleInputEmail3" placeholder="Paragraph">
+                      </div>
+                      
+                      
                       <button type="submit" name="submit" class="btn btn-primary mr-2">Submit</button>
 
                     </form>

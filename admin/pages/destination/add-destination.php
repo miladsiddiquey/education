@@ -453,7 +453,7 @@ if(isset($_POST['submit'])){
                         <textarea type="text" name="paragraph" class="form-control" id="exampleInputEmail3"  rows="5"></textarea>
                       </div>
                       <div class="form-group">
-                        <label for="exampleInputEmail3">Paragraph</label>
+                        <label for="exampleInputEmail3">Image</label>
                         <input type="file" name="image" class="form-control" id="exampleInputEmail3" placeholder="Paragraph">
                       </div>
                       <!-- <div class="form-group">

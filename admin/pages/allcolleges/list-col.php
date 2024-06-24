@@ -124,12 +124,12 @@
             </a>
             <div class="collapse" id="des_post">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="../destination/add-destination.php">Add Destination</a></li>
-                <li class="nav-item"> <a class="nav-link" href="../destination/list-destination.php">List Destination</a></li>
+                <li class="nav-item"> <a class="nav-link" href="add-destination.php">Add Destination</a></li>
+                <li class="nav-item"> <a class="nav-link" href="list-destination.php">List Destination</a></li>
               </ul>
             </div>
           </li>
-   <!-- Team Members -->
+          <!-- Team Members -->
           <li class="nav-item menu-items">
             <a class="nav-link" data-toggle="collapse" href="#team-member" aria-expanded="false" aria-controls="ui-basic">
               <span class="menu-icon">
@@ -140,12 +140,11 @@
             </a>
             <div class="collapse" id="team-member">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="./add-team.php">Add Members</a></li>
-                <li class="nav-item"> <a class="nav-link" href="./list-team.php">List Members</a></li>
+                <li class="nav-item"> <a class="nav-link" href="../team/add-team.php">Add Members</a></li>
+                <li class="nav-item"> <a class="nav-link" href="../team/list-team.php">List Members</a></li>
               </ul>
             </div>
           </li>
-
           <li class="nav-item menu-items">
             <a class="nav-link" href="../../pages/tables/basic-table.php">
               <span class="menu-icon">
@@ -406,51 +405,53 @@
               </nav>
             </div>
             <div class="row">
-              <div class="col-12 grid-margin stretch-card">
+            <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
-                    <h4 class="card-title">Destination Post</h4>
-                    <p class="card-description"> Basic form elements </p>
-                    <!-- post form -->
-<?php
-if(isset($_POST['submit'])){
-  include "../../config.php";
-  $question =mysqli_real_escape_string($con, $_POST['question']);
-  $answer =mysqli_real_escape_string($con, $_POST['answer']);
-  $sql = "INSERT INTO `question`(`question`,`answer`)VALUES('$question','$answer') ";
-  $result  =mysqli_query($con, $sql);
+                    <h4 class="card-title">Bordered table</h4>
+                    <p class="card-description"> Add class <code>.table-bordered</code>
+                    </p>
+                    
+                    <div class="table-responsive">
+                      <table class="table table-bordered">
+                        <thead>
+                          <tr>
+                            <th> # </th>
+                            <th> Title </th>
+                            <th> Paragraph </th>
+                            <th> Category </th>
+                            <th> Image </th>
+                            <th> Action </th>
+                          </tr>
+                          </thead>
+                          <?php 
+                    include '../../config.php';
+                    $sql = "SELECT * FROM allcolleges";
+                    $data = mysqli_query($con, $sql);
+                    $result = mysqli_num_rows($data);
 
-  if($result){
-    ?>
-    <script>
-    alert("FAQ added successfully")
-    window.open('http://localhost/education/admin/pages/faq/list-faq.php','_self');
-    </script>
-    <?php
-}else{
-    ?>
-    <script>
-    alert("Please try again")
-    </script>
-    <?php
-}
-
-}
-?>
-
-                    <form class="forms-sample" action="add-faq.php" method="post">
-                      <div class="form-group">
-                        <label for="exampleInputName1">Question</label>
-                        <input type="text" name="question" class="form-control" id="exampleInputName1" placeholder="Question">
-                      </div>
-                      <div class="form-group">
-                        <label for="exampleInputEmail3">Answer</label>
-                        <textarea type="text" name="answer" class="form-control" id="exampleInputEmail3"  rows="3"></textarea>
-                      </div>
-                      <button type="submit" name="submit" class="btn btn-primary mr-2">Submit</button>
-
-                    </form>
-
+                    if($result){
+                        while($row=mysqli_fetch_array($data)){
+                            ?>
+                        <tbody>
+                          <tr>
+                            <td> <?php echo $row['id']; ?> </td>
+                            <td> <?php echo $row['title']; ?> </td>
+                            <td><?php echo substr($row['paragraph'],60); ?> </td>
+                            <td><?php echo $row['category']; ?> </td>
+                            <td> <img src="<?php echo "../../../uploade-images/" .$row['image']; ?>" style = "width: 35px; height: 35px; border-radius: 0;" alt=""> </td>
+                            <td> 
+                            <a href="./edit-col.php ?id=<?php echo $row['id'];?>" style="font-size: 20px; padding-right: 10px;"><i class="mdi mdi-lead-pencil"></i></a>
+                            <a onclick="return confirm('Are you sure!')" href="./delate-col.php ?id=<?php echo $row['id'];?>" style="font-size: 20px; padding-left: 10px;"><i class="mdi mdi-delete"></i></a>
+                            </td>
+                          </tr>
+                        </tbody>
+                            <?php
+                        }
+                    }
+                    ?>     
+                      </table>
+                    </div>
                   </div>
                 </div>
               </div>

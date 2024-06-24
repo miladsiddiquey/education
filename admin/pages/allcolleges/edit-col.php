@@ -3,7 +3,7 @@ include '../../config.php';
 
 if(isset($_GET['id'])) {
     $id = $_GET['id'];
-    $select = "SELECT * FROM `question` WHERE id='$id'";
+    $select = "SELECT * FROM allcolleges WHERE id='$id'";
     $data = mysqli_query($con, $select);
     $row = mysqli_fetch_array($data);
 } else {
@@ -158,22 +158,6 @@ if(isset($_GET['id'])) {
                         </ul>
                     </div>
                 </li>
-                <!-- Team Members -->
-          <li class="nav-item menu-items">
-            <a class="nav-link" data-toggle="collapse" href="#team-member" aria-expanded="false" aria-controls="ui-basic">
-              <span class="menu-icon">
-                <i class="mdi mdi-laptop"></i>
-              </span>
-              <span class="menu-title">Team Members</span>
-              <i class="menu-arrow"></i>
-            </a>
-            <div class="collapse" id="team-member">
-              <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="./add-team.php">Add Members</a></li>
-                <li class="nav-item"> <a class="nav-link" href="./list-team.php">List Members</a></li>
-              </ul>
-            </div>
-          </li>
                 <li class="nav-item menu-items">
                     <a class="nav-link" href="../../pages/tables/basic-table.php">
                         <span class="menu-icon">
@@ -461,19 +445,37 @@ if(isset($_GET['id'])) {
                                     <h4 class="card-title">Destination Post</h4>
                                     <p class="card-description"> Basic form elements </p>
                                     <!-- post form -->
-                                    <form class="forms-sample" action="edit-faq.php?id=<?php echo $row['id'] ?>"
+                                    <form class="forms-sample" action="edit-col.php?id=<?php echo $row['id'] ?>"
                                         method="post" enctype="multipart/form-data">
                                         <div class="form-group">
-                                            <label for="exampleInputName1">Question</label>
-                                            <input type="text" name="question" class="form-control" id="exampleInputName1"
-                                                value="<?php echo $row['question'] ?>">
+                                            <label for="exampleInputName1">Title</label>
+                                            <input type="text" name="title" class="form-control" id="exampleInputName1"
+                                                value="<?php echo $row['title'] ?>">
                                         </div>
                                         <div class="form-group">
-                                            <label for="exampleInputEmail3">Answer</label>
-                                            <input type="text" name="answer" class="form-control"
-                                                id="exampleInputEmail3" value="<?php echo $row['answer'] ?>">
+                                            <label for="exampleInputEmail3">Paragraph</label>
+                                            <input type="text" name="paragraph" class="form-control"
+                                                id="exampleInputEmail3" value="<?php echo $row['paragraph'] ?>">
                                         </div>
-                                        
+                                        <div class="form-group">
+                            <label >Category</label>
+                            <div class="col-sm-3">
+                              <select class="form-control" name="category" >
+                                <option value="college">College</option>
+                                <option value="university">University</option>
+                                <option value="province">Province</option>
+                              </select>
+                            </div>
+                          </div>
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail3">Image</label>
+                                            <input type="file" name="image" class="form-control" id="exampleInputEmail3"
+                                                value="<?php echo $row['image'] ?>">
+                                            <input type="hidden" name="old_image" class="form-control"
+                                                id="exampleInputEmail3" value="<?php echo $row['image'] ?>">
+                                            <img src="<?php echo "../../../uploade-images/" .$row['image']; ?>"
+                                                style="width: 35px; height: 35px; border-radius: 0;" alt="">
+                                        </div>
 
                                         <button type="submit" name="update-btn"
                                             class="btn btn-primary mr-2">Update</button>
@@ -482,21 +484,34 @@ if(isset($_GET['id'])) {
                                     <?php
 if(isset($_POST['update-btn'])){
   include "../../config.php";
-  $question =mysqli_real_escape_string($con, $_POST['question']);
-  $answer =mysqli_real_escape_string($con, $_POST['answer']);
+  $title =mysqli_real_escape_string($con, $_POST['title']);
+  $para =mysqli_real_escape_string($con, $_POST['paragraph']);
+  $category =mysqli_real_escape_string($con, $_POST['category']);
+  $filename = $_FILES['image']['name'];
+  $old_image = $_POST['old_image'];
+  $tempfile = $_FILES['image']['tmp_name'];
+  $folder = "../../../uploade-images/".$filename;
 
+  if($filename !=''){
+    $update_filename = $filename;
+  }else{
+    $update_filename = $old_image;
+  }
   
-  $sql = "UPDATE `question` SET question = '$question', answer = '$answer' WHERE id = '$id' ";
+  $sql = "UPDATE allcolleges SET title = '$title', paragraph = '$para', category = '$category', image = '$update_filename' WHERE id = '$id' ";
   $result  =mysqli_query($con, $sql);
   
 
   if($result){
-
+    if($_FILES['image']['name'] !=''){
+      move_uploaded_file($_FILES['image']['tmp_name'],"../../../uploade-images/".$_FILES['image']['name']);
+      unlink("../../../uploade-images/".$old_image);
+    }
     ?>
                                     <script>
                                     alert("data Update successfully");
                                     window.open(
-                                        'http://localhost/education/admin/pages/faq/list-faq.php',
+                                        'http://localhost/education/admin/pages/allcolleges/list-col.php',
                                         '_self');
                                     </script>
                                     <?php

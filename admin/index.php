@@ -85,7 +85,7 @@
             <span class="nav-link">Navigation</span>
           </li>
           <li class="nav-item menu-items">
-            <a class="nav-link" href="../../index.php">
+            <a class="nav-link" href="index.php">
               <span class="menu-icon">
                 <i class="mdi mdi-speedometer"></i>
               </span>
@@ -179,6 +179,22 @@
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item"> <a class="nav-link" href="./pages/faq/add-faq.php">Add Faq</a></li>
                 <li class="nav-item"> <a class="nav-link" href="./pages/faq/list-faq.php">List Faq</a></li>
+              </ul>
+            </div>
+          </li>
+          <!-- all university -->
+          <li class="nav-item menu-items">
+            <a class="nav-link" data-toggle="collapse" href="#university" aria-expanded="false" aria-controls="ui-basic">
+              <span class="menu-icon">
+                <i class="mdi mdi-laptop"></i>
+              </span>
+              <span class="menu-title">All University</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="university">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="./pages/university/add-university.php">Add university</a></li>
+                <li class="nav-item"> <a class="nav-link" href="./pages/university/list-university.php">List university</a></li>
               </ul>
             </div>
           </li>

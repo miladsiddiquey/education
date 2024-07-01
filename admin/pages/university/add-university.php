@@ -1,4 +1,52 @@
-<?php include "../navbar/navbar.php";?>
+<?php
+include "../navbar/navbar.php";
+include "../../../database/database.php";
+
+$obj = new Database();
+
+if (isset($_POST['submit'])) {
+    $title = $_POST['title'];
+    $para = $_POST['paragraph'];
+    $global_ranking = $_POST['global_ranking'];
+    $university_name = $_POST['university_name'];
+    $student_no = $_POST['student_no'];
+    $courses_no = $_POST['courses_no'];
+    $filename = $_FILES['image']['name'];
+    $tempfile = $_FILES['image']['tmp_name'];
+    $folder = "../../../uploade-images/" . $filename;
+
+    $obj->insert('top_university', [
+        'title' => $title,
+        'paragraph' => $para,
+        'global_ranking' => $global_ranking,
+        'university_name' => $university_name,
+        'student_no' => $student_no,
+        'courses_no' => $courses_no,
+        'image' => $filename
+    ]);
+    $result = $obj->getResult();
+
+    if ($result) {
+        move_uploaded_file($tempfile, $folder);
+        ?>
+        <script>
+            alert("Data added successfully");
+            window.open('http://localhost/education/admin/pages/university/list-university.php', '_self');
+        </script>
+        <?php
+    } else {
+        $error = $obj->getResult();
+        ?>
+        <script>
+            alert("Please try again. Error: <?php echo json_encode($error); ?>");
+        </script>
+        <?php
+    }
+}
+?>
+
+
+
         <!-- partial -->
         <div class="main-panel">
           <div class="content-wrapper">
@@ -15,10 +63,10 @@
               <div class="col-12 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
-                    <h4 class="card-title">Destination Post</h4>
+                    <h4 class="card-title">Top University</h4>
                     <p class="card-description"> Basic form elements </p>
 
-                   <form class="forms-sample" action="add-col.php" method="post" enctype="multipart/form-data" >
+                   <form class="forms-sample" action="add-university.php" method="post" enctype="multipart/form-data" >
                       <div class="form-group">
                         <label for="exampleInputName1">Title</label>
                         <input type="text" name="title" class="form-control" id="exampleInputName1" placeholder="Title">
@@ -35,15 +83,15 @@
                       </div>
                       <div class="form-group">
                         <label for="exampleInputName1">University</label>
-                        <input type="text" name="university" class="form-control" id="exampleInputName1" placeholder="University Name">
+                        <input type="text" name="university_name" class="form-control" id="exampleInputName1" placeholder="University Name">
                       </div>
                       <div class="form-group">
                         <label for="exampleInputName1">No. of Students</label>
-                        <input type="text" name="students_no" class="form-control" id="exampleInputName1" placeholder="Number">
+                        <input type="text" name="student_no" class="form-control" id="exampleInputName1" placeholder="Number">
                       </div>
                       <div class="form-group">
                         <label for="exampleInputName1">No. of Courses</label>
-                        <input type="text" name="course_no" class="form-control" id="exampleInputName1" placeholder="Number">
+                        <input type="text" name="courses_no" class="form-control" id="exampleInputName1" placeholder="Number">
                       </div>
                       </div>
 

@@ -2,10 +2,14 @@
 include "database.php";
 $obj = new Database();
 
+$name = $_POST['jamal'];
+$class = $_POST['five'];
+$address = $_POST['sylhet'];
+
 // insert data
-// $obj->insert('client', ['name' =>'milad siddiquey', 'address'=>'bangladesh']);
-// echo "insert result is: ";
-// print_r($obj->getResult());
+$obj->insert('student', ['name' =>' $name', 'class'=>'$class', 'address'=>'$address']);
+echo "insert result is: ";
+print_r($obj->getResult());
 
 //update
 // $obj->update('client', ['name' =>'milad siddiquey', 'address'=>'bangladesh'],'id="5"');
@@ -19,8 +23,8 @@ $obj = new Database();
 
 //select
 
-$obj->select('client','*',null,null,null,null);
-echo "select result is: ";
-print_r($obj->getResult());
+// $obj->select('client','*',null,null,null,null);
+// echo "select result is: ";
+// print_r($obj->getResult());
 
 ?>

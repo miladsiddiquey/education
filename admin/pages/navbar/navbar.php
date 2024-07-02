@@ -91,15 +91,6 @@
               <span class="menu-title">Dashboard</span>
             </a>
           </li>
-
-          <li class="nav-item menu-items">
-            <a class="nav-link" href="pages/forms/basic_elements.php">
-              <span class="menu-icon">
-                <i class="mdi mdi-playlist-play"></i>
-              </span>
-              <span class="menu-title">Form Elements</span>
-            </a>
-          </li>
           <!-- Destination post -->
           <li class="nav-item menu-items">
             <a class="nav-link" data-toggle="collapse" href="#des_post" aria-expanded="false" aria-controls="ui-basic">
@@ -197,7 +188,23 @@
               </ul>
             </div>
           </li>
+          <!-- Useres -->
           <li class="nav-item menu-items">
+            <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="ui-basic">
+              <span class="menu-icon">
+                <i class="mdi mdi-laptop"></i>
+              </span>
+              <span class="menu-title">Admin User</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="auth">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="../users/add-user.php">Add user</a></li>
+                <li class="nav-item"> <a class="nav-link" href="../users/list-user.php">List user</a></li>
+              </ul>
+            </div>
+          </li>
+          <!-- <li class="nav-item menu-items">
             <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
               <span class="menu-icon">
                 <i class="mdi mdi-security"></i>
@@ -214,7 +221,7 @@
                 <li class="nav-item"> <a class="nav-link" href="pages/samples/register.php"> Register </a></li>
               </ul>
             </div>
-          </li>
+          </li> -->
         </ul>
       </nav>
       <!-- partial -->

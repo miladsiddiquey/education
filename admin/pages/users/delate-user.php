@@ -5,27 +5,23 @@ $obj = new Database();
 $id = (int)$_GET['id'];
 if ($id > 0) {
     
-    $obj->select('top_university', '*', null, "id='$id'", null, null);
+    $obj->select('admin_user', '*', null, "id='$id'", null, null);
     $result = $obj->getResult();
 
     if ($result && count($result) > 0) {
         $row = $result[0];
-        $image = $row['image'];
 
-        $deleteQuery = "DELETE FROM top_university WHERE id='$id'";
+        $deleteQuery = "DELETE FROM admin_user WHERE id='$id'";
 
         // Delete the record from the database
-        $deleteResult = $obj->delete('top_university', "id='$id'");
+        $deleteResult = $obj->delete('admin_user', "id='$id'");
 
         if ($deleteResult) {
-            // Delete the image file from the server
-            if (file_exists("../../../uploade-images/".$image)) {
-                unlink("../../../uploade-images/".$image);
-            }
+
             ?>
             <script>
                 alert("Data deleted successfully");
-                window.open('http://localhost/education/admin/pages/university/list-university.php', '_self');
+                window.open('http://localhost/education/admin/pages/users/list-user.php', '_self');
             </script>
             <?php
         } else {

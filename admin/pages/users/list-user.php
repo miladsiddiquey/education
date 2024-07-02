@@ -15,7 +15,7 @@
             <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
-                    <h4 class="card-title">Bordered table</h4>
+                    <h4 class="card-title">Admin User List</h4>
                     <p class="card-description"> Add class <code>.table-bordered</code>
                     </p>
                     
@@ -24,13 +24,9 @@
                         <thead>
                           <tr>
                             <th> # </th>
-                            <th> Title </th>
-                            <th> Paragraph </th>
-                            <th> g_ranking </th>
-                            <th> university </th>
-                            <th> student_no </th>
-                            <th> courses_no </th>
-                            <th> Image </th>
+                            <th> Username </th>
+                            <th> Email </th>
+                            <th> Password </th>
                             <th> Action </th>
                           </tr>
                           </thead>
@@ -38,25 +34,19 @@
                     include "../../../database/database.php";
                     $obj = new Database();
                     $limit = 2;
-                    $obj->select('top_university', '*', null, null, null, $limit);
+                    $obj->select('admin_user', '*', null, null, null, $limit);
                     $result = $obj->getResult();
 
-                    
-                   
                     foreach ($result as $row) {
                   ?>
                   <tr>
                     <td><?= $row['id']; ?></td>
-                    <td><?= $row['title']; ?></td>
-                    <td><?= $row['paragraph']; ?></td>
-                    <td><?= $row['global_ranking']; ?></td>
-                    <td><?= $row['university_name']; ?></td>
-                    <td><?= $row['student_no']; ?></td>
-                    <td><?= $row['courses_no']; ?></td>
-                    <td><img src="<?= "../../../uploade-images/" . $row['image']; ?>" style="width: 35px; height: 35px; border-radius: 0;" alt=""></td>
+                    <td><?= $row['username']; ?></td>
+                    <td><?= $row['email']; ?></td>
+                    <td><?= $row['password']; ?></td>
                     <td>
-                      <a href="./edit-university.php?id=<?= $row['id']; ?>" style="font-size: 20px; padding-right: 10px;"><i class="mdi mdi-lead-pencil"></i></a>
-                      <a onclick="return confirm('Are you sure?')" href="./delate-university.php?id=<?= $row['id']; ?>" style="font-size: 20px; padding-left: 10px;"><i class="mdi mdi-delete"></i></a>
+                      <a href="./edit-user.php?id=<?= $row['id']; ?>" style="font-size: 20px; padding-right: 10px;"><i class="mdi mdi-lead-pencil"></i></a>
+                      <a onclick="return confirm('Are you sure?')" href="./delate-user.php?id=<?= $row['id']; ?>" style="font-size: 20px; padding-left: 10px;"><i class="mdi mdi-delete"></i></a>
                     </td>
                   </tr>
                   

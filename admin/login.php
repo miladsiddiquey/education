@@ -6,17 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Corona Admin</title>
     <!-- plugins:css -->
-    <link rel="stylesheet" href="../../assets/vendors/mdi/css/materialdesignicons.min.css">
-    <link rel="stylesheet" href="../../assets/vendors/css/vendor.bundle.base.css">
+    <link rel="stylesheet" href="./assets/vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="./assets/vendors/css/vendor.bundle.base.css">
     <!-- endinject -->
     <!-- Plugin css for this page -->
     <!-- End plugin css for this page -->
     <!-- inject:css -->
     <!-- endinject -->
     <!-- Layout styles -->
-    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="stylesheet" href="./assets/css/style.css">
     <!-- End layout styles -->
-    <link rel="shortcut icon" href="../../assets/images/favicon.png" />
+    <link rel="shortcut icon" href="./assets/images/favicon.png" />
   </head>
   <body>
     <div class="container-scroller">
@@ -27,29 +27,32 @@
               <div class="card-body px-5 py-5">
                 <h3 class="card-title text-left mb-3">Login</h3>
 
-                <?php 
-                    include "../../../database/database.php";
-                    $obj = new Database();
+               <?php
+              if(isset($_POST['login'])){
+                include './config.php';
 
-                   
-                    if (isset($_POST['submit'])) {
-                        $email = $_POST['email'];
-                        $password = md5($_POST['password']);
+                $email = $_POST['email'];
+                $password = $_POST['password'];
 
-                        $sql = "SELECT id, email FROM admin_user WHERE email = '{$username}' AND password = '{$password}'";
+                $sql = "SELECT * FROM admin_user WHERE email = '$email'";
+                $result = mysqli_query($con, $sql);
+                $user = mysqli_fetch_array($result, MYSQLI_ASSOC);
+echo $user;
+                if($user){
+                  if(password_verify($password, $user['password'])){
+                    header("Location: http://localhost/education/admin/index.php");
+                    die();
+                  }else{
+                    echo "<div class='alert alert-danger'>Password dose not matched</div>";
+                  }
+                }else{
+                  echo "<div class='alert alert-danger'>Email does not metched</div>";
+                }
 
-                        $result = mysqli_query($conn, $sql) or die("Query Faild");
+              }
 
-                        if(mysqli_num_rows($result)>0){
 
-                          while($row)
-
-                        }else{
-                          echo '<div>Email and password not matched</div>';
-                        }
-                    }
-                ?>
-
+              ?>
 
                 <form action="login.php" method="post">
                   <div class="form-group">
@@ -68,7 +71,7 @@
                     <a href="#" class="forgot-pass">Forgot password</a>
                   </div>
                   <div class="text-center">
-                    <button type="submit" class="btn btn-primary btn-block enter-btn">Login</button>
+                    <button type="login" class="btn btn-primary btn-block enter-btn">Login</button>
                   </div>
                  <!-- <div class="d-flex">
                     <button class="btn btn-facebook mr-2 col">
@@ -89,16 +92,16 @@
     </div>
     <!-- container-scroller -->
     <!-- plugins:js -->
-    <script src="../../assets/vendors/js/vendor.bundle.base.js"></script>
+    <script src="./assets/vendors/js/vendor.bundle.base.js"></script>
     <!-- endinject -->
     <!-- Plugin js for this page -->
     <!-- End plugin js for this page -->
     <!-- inject:js -->
-    <script src="../../assets/js/off-canvas.js"></script>
-    <script src="../../assets/js/hoverable-collapse.js"></script>
-    <script src="../../assets/js/misc.js"></script>
-    <script src="../../assets/js/settings.js"></script>
-    <script src="../../assets/js/todolist.js"></script>
+    <script src="./assets/js/off-canvas.js"></script>
+    <script src="./assets/js/hoverable-collapse.js"></script>
+    <script src="./assets/js/misc.js"></script>
+    <script src="./assets/js/settings.js"></script>
+    <script src="./assets/js/todolist.js"></script>
     <!-- endinject -->
   </body>
 </html>

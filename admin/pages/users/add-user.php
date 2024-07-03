@@ -7,7 +7,8 @@ $obj = new Database();
 if (isset($_POST['submit'])) {
     $username = $_POST['username'];
     $email = $_POST['email'];
-    $password = md5($_POST['password']);
+    $password = password_hash($_POST["password"], PASSWORD_DEFAULT);
+    
 
     $obj->insert('admin_user', [
         'username' => $username,

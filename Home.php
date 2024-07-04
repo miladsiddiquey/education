@@ -550,7 +550,7 @@ $obj = new Database();
       ?>
 
           <div class="home-review-slide">
-            <div class="home-review-box">
+            <div class="home-review-box"> 
               <div class="review-star">
                 <i class="fa-solid fa-star"></i>
                 <i class="fa-solid fa-star"></i>

@@ -24,6 +24,16 @@ class Database {
         }
     }
 
+    // Function to execute SQL queries
+    public function query($sql) {
+        return $this->mysqli->query($sql);
+    }
+
+    // Function to escape strings to prevent SQL injection
+    public function escapeString($str) {
+        return $this->mysqli->real_escape_string($str);
+    }
+
     // Function to insert data into the database
     public function insert($table, $params = array()) {
         if ($this->tableExists($table)) {

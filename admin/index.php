@@ -33,8 +33,8 @@ include './login-session.php';
       <!-- partial:partials/_sidebar.php -->
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top">
-          <a class="sidebar-brand brand-logo" href="index.php"><img src="../../assets/images/logo.svg" alt="logo" /></a>
-          <a class="sidebar-brand brand-logo-mini" href="index.php"><img src="../../assets/images/logo-mini.svg" alt="logo" /></a>
+          <a class="sidebar-brand brand-logo" href="./index.php"><h2 style="color:#fff">Education</h2></a>
+          <a class="sidebar-brand brand-logo-mini" href="./index.php"><h4 style="color:#fff">Education</h4></a>
         </div>
         <ul class="nav">
           <li class="nav-item profile">

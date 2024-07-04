@@ -4,7 +4,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Corona Admin</title>
+    <title>education</title>
     <!-- plugins:css -->
     <link rel="stylesheet" href="./admin/assets/vendors/mdi/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="./admin/assets/vendors/css/vendor.bundle.base.css">
@@ -29,11 +29,11 @@
                 <form action="login_process.php" method="post">
                   <div class="form-group">
                     <label>Username or email *</label>
-                    <input type="email" name="email" class="form-control p_input">
+                    <input type="email" name="email" class="form-control p_input" required>
                   </div>
                   <div class="form-group">
                     <label>Password *</label>
-                    <input type="password" name="password" class="form-control p_input">
+                    <input type="password" name="password" class="form-control p_input" required>
                   </div>
                   <div class="form-group d-flex align-items-center justify-content-between">
                     <div class="form-check">

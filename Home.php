@@ -1,4 +1,7 @@
-<!-- @format -->
+<?php
+include "./database/database.php";
+$obj = new Database();
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -226,15 +229,13 @@
         </div>
 
         <div class="home-destination-content">
-          <?php 
-                    include './admin/config.php';
-                    $sql = "SELECT * FROM destinationpost";
-                    $data = mysqli_query($con, $sql);
-                    $result = mysqli_num_rows($data);
 
-                    if($result){
-                        while($row=mysqli_fetch_array($data)){
-                            ?>
+          <?php
+          $obj->select('destinationpost', '*', null, null, null, null);
+          $result = $obj->getResult();
+
+            foreach ($result as $row) {
+            ?>
           <div class="home-destination-slide">
             <div class="card-box">
               <div class="card-box-img">
@@ -243,16 +244,12 @@
               <div class="card-box-text">
                 <h4><?php echo $row['title']; ?></h4>
                 <p><?php echo $row['paragraph']; ?> </p>
-                <a href="#"
-                  >Learn More <i class="fa-solid fa-arrow-right"></i
+                <a href="./university-page.php">Learn More <i class="fa-solid fa-arrow-right"></i
                 ></a>
               </div>
             </div>
           </div>
-          <?php
-                        }
-                    }
-                    ?>     
+          <?php } ?>    
         </div>
       </div>
     </div>
@@ -282,7 +279,7 @@
               nulla pariatur. Excepteur sint occaecat cupidatat non proident,
               sunt in culpa qui officia deserunt mollit anim id est laborum.
             </p>
-            <a href="#" class="btn-main">View Details</a>
+            <a href="./about.php" class="btn-main">View Details</a>
           </div>
         </div>
       </div>
@@ -298,87 +295,27 @@
           <h2>Meet Our Professional Team</h2>
         </div>
         <div class="home-team-content grid-4">
-          <div class="home-team-box">
+        <?php 
+    
+          $obj->select('team', '*', null, null, null, null);
+          $result = $obj->getResult();
+
+            foreach ($result as $row) {
+            ?>
+        <div class="home-team-box">
             <div class="home-team-img">
-              <img src="img/profileimg.png" alt="" />
+              <img src="<?php echo "./uploade-images/" .$row['image']; ?>" alt="" />
             </div>
             <div class="home-team-text">
-              <h4>Team Member Name</h4>
-              <small>Team Member Name</small>
+              <h4><?php echo $row['name']; ?></h4>
+              <small><?php echo $row['description']; ?></small>
               <a href="#">Read More <i class="fa-solid fa-arrow-right"></i> </a>
             </div>
           </div>
-          <div class="home-team-box">
-            <div class="home-team-img">
-              <img src="img/profileimg.png" alt="" />
-            </div>
-            <div class="home-team-text">
-              <h4>Team Member Name</h4>
-              <small>Team Member Name</small>
-              <a href="#">Read More <i class="fa-solid fa-arrow-right"></i> </a>
-            </div>
-          </div>
-          <div class="home-team-box">
-            <div class="home-team-img">
-              <img src="img/profileimg.png" alt="" />
-            </div>
-            <div class="home-team-text">
-              <h4>Team Member Name</h4>
-              <small>Team Member Name</small>
-              <a href="#">Read More <i class="fa-solid fa-arrow-right"></i> </a>
-            </div>
-          </div>
-          <div class="home-team-box">
-            <div class="home-team-img">
-              <img src="img/profileimg.png" alt="" />
-            </div>
-            <div class="home-team-text">
-              <h4>Team Member Name</h4>
-              <small>Team Member Name</small>
-              <a href="#">Read More <i class="fa-solid fa-arrow-right"></i> </a>
-            </div>
-          </div>
-          <div class="home-team-box">
-            <div class="home-team-img">
-              <img src="img/profileimg.png" alt="" />
-            </div>
-            <div class="home-team-text">
-              <h4>Team Member Name</h4>
-              <small>Team Member Name</small>
-              <a href="#">Read More <i class="fa-solid fa-arrow-right"></i> </a>
-            </div>
-          </div>
-          <div class="home-team-box">
-            <div class="home-team-img">
-              <img src="img/profileimg.png" alt="" />
-            </div>
-            <div class="home-team-text">
-              <h4>Team Member Name</h4>
-              <small>Team Member Name</small>
-              <a href="#">Read More <i class="fa-solid fa-arrow-right"></i> </a>
-            </div>
-          </div>
-          <div class="home-team-box">
-            <div class="home-team-img">
-              <img src="img/profileimg.png" alt="" />
-            </div>
-            <div class="home-team-text">
-              <h4>Team Member Name</h4>
-              <small>Team Member Name</small>
-              <a href="#">Read More <i class="fa-solid fa-arrow-right"></i> </a>
-            </div>
-          </div>
-          <div class="home-team-box">
-            <div class="home-team-img">
-              <img src="img/profileimg.png" alt="" />
-            </div>
-            <div class="home-team-text">
-              <h4>Team Member Name</h4>
-              <small>Team Member Name</small>
-              <a href="#">Read More <i class="fa-solid fa-arrow-right"></i> </a>
-            </div>
-          </div>
-        </div>
+
+          <?php } ?>
+
+         </div>
       </div>
     </div>
 
@@ -446,97 +383,30 @@
             role="tabpanel"
             aria-labelledby="pills-home-tab"
           >
-            <div class="top-university-content grid-3">
+        <div class="top-university-content grid-3">
+       
+          <?php 
+          $obj->select('allcolleges', '*', null, 'category="college"', null, null); 
+          $result = $obj->getResult();
+
+            foreach ($result as $row) {
+            ?>
               <div class="card-box">
                 <div class="card-box-img">
-                  <img src="img/post1.png" alt="img" />
+                  <img src="<?php echo "./uploade-images/" .$row['image']; ?>" alt="img" />
                 </div>
                 <div class="card-box-text">
-                  <h4>Study in AUSTRALIA</h4>
+                  <h4><?php echo $row['title']; ?></h4>
                   <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore.
+                  <?php echo $row['paragraph']; ?>
                   </p>
                   <a href="#"
                     >Learn More <i class="fa-solid fa-arrow-right"></i
                   ></a>
                 </div>
               </div>
-              <div class="card-box">
-                <div class="card-box-img">
-                  <img src="img/post1.png" alt="img" />
-                </div>
-                <div class="card-box-text">
-                  <h4>Study in AUSTRALIA</h4>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore.
-                  </p>
-                  <a href="#"
-                    >Learn More <i class="fa-solid fa-arrow-right"></i
-                  ></a>
-                </div>
-              </div>
-              <div class="card-box">
-                <div class="card-box-img">
-                  <img src="img/post1.png" alt="img" />
-                </div>
-                <div class="card-box-text">
-                  <h4>Study in AUSTRALIA</h4>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore.
-                  </p>
-                  <a href="#"
-                    >Learn More <i class="fa-solid fa-arrow-right"></i
-                  ></a>
-                </div>
-              </div>
-              <div class="card-box">
-                <div class="card-box-img">
-                  <img src="img/post1.png" alt="img" />
-                </div>
-                <div class="card-box-text">
-                  <h4>Study in AUSTRALIA</h4>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore.
-                  </p>
-                  <a href="#"
-                    >Learn More <i class="fa-solid fa-arrow-right"></i
-                  ></a>
-                </div>
-              </div>
-              <div class="card-box">
-                <div class="card-box-img">
-                  <img src="img/post1.png" alt="img" />
-                </div>
-                <div class="card-box-text">
-                  <h4>Study in AUSTRALIA</h4>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore.
-                  </p>
-                  <a href="#"
-                    >Learn More <i class="fa-solid fa-arrow-right"></i
-                  ></a>
-                </div>
-              </div>
-              <div class="card-box">
-                <div class="card-box-img">
-                  <img src="img/post1.png" alt="img" />
-                </div>
-                <div class="card-box-text">
-                  <h4>Study in AUSTRALIA</h4>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore.
-                  </p>
-                  <a href="#"
-                    >Learn More <i class="fa-solid fa-arrow-right"></i
-                  ></a>
-                </div>
-              </div>
+              <?php } ?>
+
             </div>
           </div>
           <div
@@ -546,96 +416,28 @@
             aria-labelledby="pills-profile-tab"
           >
             <div class="top-university-content grid-3">
+            <!-- university tab -->
+            <?php 
+          $obj->select('allcolleges', '*', null, 'category="university"', null, null); 
+          $result = $obj->getResult();
+
+            foreach ($result as $row) {
+            ?>
               <div class="card-box">
                 <div class="card-box-img">
-                  <img src="img/post1.png" alt="img" />
+                  <img src="<?php echo "./uploade-images/" .$row['image']; ?>" alt="img" />
                 </div>
                 <div class="card-box-text">
-                  <h4>Study in AUSTRALIA</h4>
+                  <h4><?php echo $row['title']; ?></h4>
                   <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore.
+                  <?php echo $row['paragraph']; ?>
                   </p>
                   <a href="#"
                     >Learn More <i class="fa-solid fa-arrow-right"></i
                   ></a>
                 </div>
               </div>
-              <div class="card-box">
-                <div class="card-box-img">
-                  <img src="img/post1.png" alt="img" />
-                </div>
-                <div class="card-box-text">
-                  <h4>Study in AUSTRALIA</h4>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore.
-                  </p>
-                  <a href="#"
-                    >Learn More <i class="fa-solid fa-arrow-right"></i
-                  ></a>
-                </div>
-              </div>
-              <div class="card-box">
-                <div class="card-box-img">
-                  <img src="img/post1.png" alt="img" />
-                </div>
-                <div class="card-box-text">
-                  <h4>Study in AUSTRALIA</h4>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore.
-                  </p>
-                  <a href="#"
-                    >Learn More <i class="fa-solid fa-arrow-right"></i
-                  ></a>
-                </div>
-              </div>
-              <div class="card-box">
-                <div class="card-box-img">
-                  <img src="img/post1.png" alt="img" />
-                </div>
-                <div class="card-box-text">
-                  <h4>Study in AUSTRALIA</h4>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore.
-                  </p>
-                  <a href="#"
-                    >Learn More <i class="fa-solid fa-arrow-right"></i
-                  ></a>
-                </div>
-              </div>
-              <div class="card-box">
-                <div class="card-box-img">
-                  <img src="img/post1.png" alt="img" />
-                </div>
-                <div class="card-box-text">
-                  <h4>Study in AUSTRALIA</h4>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore.
-                  </p>
-                  <a href="#"
-                    >Learn More <i class="fa-solid fa-arrow-right"></i
-                  ></a>
-                </div>
-              </div>
-              <div class="card-box">
-                <div class="card-box-img">
-                  <img src="img/post1.png" alt="img" />
-                </div>
-                <div class="card-box-text">
-                  <h4>Study in AUSTRALIA</h4>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore.
-                  </p>
-                  <a href="#"
-                    >Learn More <i class="fa-solid fa-arrow-right"></i
-                  ></a>
-                </div>
-              </div>
+              <?php } ?>
             </div>
           </div>
           <div
@@ -645,96 +447,28 @@
             aria-labelledby="pills-contact-tab"
           >
             <div class="top-university-content grid-3">
+            <!-- province tab -->
+            <?php 
+          $obj->select('allcolleges', '*', null, 'category="province"', null, null); 
+          $result = $obj->getResult();
+
+            foreach ($result as $row) {
+            ?>
               <div class="card-box">
                 <div class="card-box-img">
-                  <img src="img/post1.png" alt="img" />
+                  <img src="<?php echo "./uploade-images/" .$row['image']; ?>" alt="img" />
                 </div>
                 <div class="card-box-text">
-                  <h4>Study in AUSTRALIA</h4>
+                  <h4><?php echo $row['title']; ?></h4>
                   <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore.
+                  <?php echo $row['paragraph']; ?>
                   </p>
                   <a href="#"
                     >Learn More <i class="fa-solid fa-arrow-right"></i
                   ></a>
                 </div>
               </div>
-              <div class="card-box">
-                <div class="card-box-img">
-                  <img src="img/post1.png" alt="img" />
-                </div>
-                <div class="card-box-text">
-                  <h4>Study in AUSTRALIA</h4>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore.
-                  </p>
-                  <a href="#"
-                    >Learn More <i class="fa-solid fa-arrow-right"></i
-                  ></a>
-                </div>
-              </div>
-              <div class="card-box">
-                <div class="card-box-img">
-                  <img src="img/post1.png" alt="img" />
-                </div>
-                <div class="card-box-text">
-                  <h4>Study in AUSTRALIA</h4>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore.
-                  </p>
-                  <a href="#"
-                    >Learn More <i class="fa-solid fa-arrow-right"></i
-                  ></a>
-                </div>
-              </div>
-              <div class="card-box">
-                <div class="card-box-img">
-                  <img src="img/post1.png" alt="img" />
-                </div>
-                <div class="card-box-text">
-                  <h4>Study in AUSTRALIA</h4>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore.
-                  </p>
-                  <a href="#"
-                    >Learn More <i class="fa-solid fa-arrow-right"></i
-                  ></a>
-                </div>
-              </div>
-              <div class="card-box">
-                <div class="card-box-img">
-                  <img src="img/post1.png" alt="img" />
-                </div>
-                <div class="card-box-text">
-                  <h4>Study in AUSTRALIA</h4>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore.
-                  </p>
-                  <a href="#"
-                    >Learn More <i class="fa-solid fa-arrow-right"></i
-                  ></a>
-                </div>
-              </div>
-              <div class="card-box">
-                <div class="card-box-img">
-                  <img src="img/post1.png" alt="img" />
-                </div>
-                <div class="card-box-text">
-                  <h4>Study in AUSTRALIA</h4>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore.
-                  </p>
-                  <a href="#"
-                    >Learn More <i class="fa-solid fa-arrow-right"></i
-                  ></a>
-                </div>
-              </div>
+              <?php } ?>
             </div>
           </div>
         </div>
@@ -777,7 +511,7 @@
               </p>
             </div>
             <div>
-              <a href="#" class="btn-main">Contact Our Experts</a>
+              <a href="./contact.php" class="btn-main">Contact Our Experts</a>
             </div>
           </div>
         </div>
@@ -807,6 +541,14 @@
         </div>
 
         <div class="home-review-content">
+        <?php 
+    
+    $obj->select('review', '*', null, null, null, null);
+    $result = $obj->getResult();
+
+      foreach ($result as $row) {
+      ?>
+
           <div class="home-review-slide">
             <div class="home-review-box">
               <div class="review-star">
@@ -816,116 +558,20 @@
                 <i class="fa-solid fa-star"></i>
                 <i class="fa-solid fa-star"></i>
               </div>
-
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-                in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-                nulla pariatur.
-              </p>
-
+                <p><?php echo $row['description'];?></p>
               <div class="home-review-box-profile d-flex align-items-center">
                 <div class="home-review-box-profile-left">
-                  <img src="img/profileimg.png" alt="img" />
+                  <img src="<?php echo "./uploade-images/" .$row['image']; ?>" alt="img" />
                 </div>
                 <div class="home-review-box-profile-right">
-                  <h5>Mohammad Khalil</h5>
-                  <small>21-11-2023</small>
+                  <h5><?php echo $row['name'];?></h5>
+                  <small><?php echo $row['date'];?></small>
                 </div>
               </div>
             </div>
           </div>
-          <div class="home-review-slide">
-            <div class="home-review-box">
-              <div class="review-star">
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-              </div>
+<?php }?>
 
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-                in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-                nulla pariatur.
-              </p>
-
-              <div class="home-review-box-profile d-flex align-items-center">
-                <div class="home-review-box-profile-left">
-                  <img src="img/profileimg.png" alt="img" />
-                </div>
-                <div class="home-review-box-profile-right">
-                  <h5>Mohammad Khalil</h5>
-                  <small>21-11-2023</small>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="home-review-slide">
-            <div class="home-review-box">
-              <div class="review-star">
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-              </div>
-
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-                in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-                nulla pariatur.
-              </p>
-
-              <div class="home-review-box-profile d-flex align-items-center">
-                <div class="home-review-box-profile-left">
-                  <img src="img/profileimg.png" alt="img" />
-                </div>
-                <div class="home-review-box-profile-right">
-                  <h5>Mohammad Khalil</h5>
-                  <small>21-11-2023</small>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="home-review-slide">
-            <div class="home-review-box">
-              <div class="review-star">
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-              </div>
-
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-                in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-                nulla pariatur.
-              </p>
-
-              <div class="home-review-box-profile d-flex align-items-center">
-                <div class="home-review-box-profile-left">
-                  <img src="img/profileimg.png" alt="img" />
-                </div>
-                <div class="home-review-box-profile-right">
-                  <h5>Mohammad Khalil</h5>
-                  <small>21-11-2023</small>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </div>

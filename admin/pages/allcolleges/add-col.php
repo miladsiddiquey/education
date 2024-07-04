@@ -1,4 +1,43 @@
-<?php include "../navbar/navbar.php";?>
+<?php
+include "../navbar/navbar.php";
+include "../../../database/database.php";
+
+$obj = new Database();
+
+if (isset($_POST['submit'])) {
+    $title = $_POST['title'];
+    $para = $_POST['paragraph'];
+    $category = $_POST['category'];
+    $filename = $_FILES['image']['name'];
+    $tempfile = $_FILES['image']['tmp_name'];
+    $folder = "../../../uploade-images/" . $filename;
+
+    $obj->insert('allcolleges', [
+        'title' => $title,
+        'paragraph' => $para,
+        'category' => $category,
+        'image' => $filename
+    ]);
+    $result = $obj->getResult();
+
+    if ($result) {
+        move_uploaded_file($tempfile, $folder);
+        ?>
+        <script>
+            alert("Data added successfully");
+            window.open('http://localhost/education/admin/pages/allcolleges/list-col.php', '_self');
+        </script>
+        <?php
+    } else {
+        $error = $obj->getResult();
+        ?>
+        <script>
+            alert("Please try again. Error: <?php echo json_encode($error); ?>");
+        </script>
+        <?php
+    }
+}
+?>
         <!-- partial -->
         <div class="main-panel">
           <div class="content-wrapper">
@@ -18,37 +57,7 @@
                     <h4 class="card-title">Destination Post</h4>
                     <p class="card-description"> Basic form elements </p>
                     <!-- post form -->
-<?php
-if(isset($_POST['submit'])){
-  include "../../config.php";
-  $title =mysqli_real_escape_string($con, $_POST['title']);
-  $para =mysqli_real_escape_string($con, $_POST['paragraph']);
-  $category=mysqli_real_escape_string($con, $_POST['category']);
-  $filename = $_FILES['image']['name'];
-  $tempfile = $_FILES['image']['tmp_name'];
-  $folder = "../../../uploade-images/".$filename;
-  
-  $sql = "INSERT INTO `allcolleges`(`title`,`paragraph`,`category`,`image`)VALUES('$title','$para','$category','$filename') ";
-  $result  =mysqli_query($con, $sql);
-  move_uploaded_file($tempfile,$folder);
 
-  if($result){
-    ?>
-    <script>
-    alert("data added successfully")
-    window.open('http://localhost/education/admin/pages/allcolleges/list-col.php','_self');
-    </script>
-    <?php
-}else{
-    ?>
-    <script>
-    alert("Please try again")
-    </script>
-    <?php
-}
-
-}
-?>
 
                     <form class="forms-sample" action="add-col.php" method="post" enctype="multipart/form-data" >
                       <div class="form-group">

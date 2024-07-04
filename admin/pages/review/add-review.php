@@ -1,4 +1,43 @@
-<?php include "../navbar/navbar.php";?>
+<?php
+include "../navbar/navbar.php";
+include "../../../database/database.php";
+
+$obj = new Database();
+
+if (isset($_POST['submit'])) {
+    $name = $_POST['name'];
+    $description = $_POST['description']; 
+    $stars = $_POST['stars']; 
+    $filename = $_FILES['image']['name'];
+    $tempfile = $_FILES['image']['tmp_name'];
+    $folder = "../../../uploade-images/" . $filename;
+
+    $obj->insert('review', [
+        'name' => $name,
+        'description' => $description,
+        'stars' => $stars,
+        'image' => $filename
+    ]);
+    $result = $obj->getResult();
+
+    if ($result) {
+        move_uploaded_file($tempfile, $folder);
+        ?>
+        <script>
+            alert("Data added successfully");
+            window.open('http://localhost/education/admin/pages/review/list-review.php', '_self');
+        </script>
+        <?php
+    } else {
+        $error = $obj->getResult();
+        ?>
+        <script>
+            alert("Please try again. Error: <?php echo json_encode($error); ?>");
+        </script>
+        <?php
+    }
+}
+?>
         <!-- partial -->
         <div class="main-panel">
           <div class="content-wrapper">
@@ -18,37 +57,6 @@
                     <h4 class="card-title">Client Review</h4>
                     <p class="card-description"> Basic form elements </p>
                     <!-- post form -->
-<?php
-if(isset($_POST['submit'])){
-  include "../../config.php";
-  $name =mysqli_real_escape_string($con, $_POST['name']);
-  $description =mysqli_real_escape_string($con, $_POST['description']);
-  $stars =mysqli_real_escape_string($con, $_POST['stars']);
-  $filename = $_FILES['image']['name'];
-  $tempfile = $_FILES['image']['tmp_name'];
-  $folder = "../../../uploade-images/".$filename;
-  
-  $sql = "INSERT INTO `client-review`(`name`,`description`,`stars`,`image`)VALUES('$name','$description','$stars','$filename') ";
-  $result  =mysqli_query($con, $sql);
-  move_uploaded_file($tempfile,$folder);
-
-  if($result){
-    ?>
-    <script>
-    alert("Review added successfully")
-    window.open('http://localhost/education/admin/pages/review/list-review.php','_self');
-    </script>
-    <?php
-}else{
-    ?>
-    <script>
-    alert("Please try again")
-    </script>
-    <?php
-}
-
-}
-?>
 
                     <form class="forms-sample" action="add-review.php" method="post" enctype="multipart/form-data" >
                       <div class="form-group">

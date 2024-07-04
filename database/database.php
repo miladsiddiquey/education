@@ -35,12 +35,33 @@ class Database {
     }
 
     // Function to insert data into the database
+    // public function insert($table, $params = array()) {
+    //     if ($this->tableExists($table)) {
+    //         $table_columns = implode(', ', array_keys($params));
+    //         $table_values = implode("', '", array_map([$this->mysqli, 'real_escape_string'], $params));
+
+    //         $sql = "INSERT INTO $table ($table_columns) VALUES ('$table_values')";
+    //         if ($this->mysqli->query($sql)) {
+    //             array_push($this->result, $this->mysqli->insert_id);
+    //             return true;
+    //         } else {
+    //             array_push($this->result, $this->mysqli->error);
+    //             return false;
+    //         }
+    //     } else {
+    //         return false;
+    //     }
+    // }
+
     public function insert($table, $params = array()) {
         if ($this->tableExists($table)) {
+            // Escape column names
             $table_columns = implode(', ', array_keys($params));
-            $table_values = implode("', '", array_map([$this->mysqli, 'real_escape_string'], $params));
-
-            $sql = "INSERT INTO $table ($table_columns) VALUES ('$table_values')";
+    
+            // Escape and quote values
+            $table_values = "'" . implode("', '", array_map([$this->mysqli, 'real_escape_string'], $params)) . "'";
+    
+            $sql = "INSERT INTO $table ($table_columns) VALUES ($table_values)";
             if ($this->mysqli->query($sql)) {
                 array_push($this->result, $this->mysqli->insert_id);
                 return true;
@@ -52,6 +73,7 @@ class Database {
             return false;
         }
     }
+
 
     // Function to update a row in the database
     public function update($table, $params = array(), $where = null) {

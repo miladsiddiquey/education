@@ -32,19 +32,18 @@
                           </tr>
                           </thead>
                           <?php 
-                    include '../../config.php';
-                    $sql = "SELECT * FROM `client-review`";
-                    $data = mysqli_query($con, $sql);
-                    $result = mysqli_num_rows($data);
-
-                    if($result){
-                        while($row=mysqli_fetch_array($data)){
-                            ?>
+                    include "../../../database/database.php";
+                    $obj = new Database();
+                    $limit = 2;
+                    $obj->select('review', '*', null, null, null, $limit);
+                    $result = $obj->getResult();
+                    foreach ($result as $row) {
+                  ?>
                         <tbody>
                           <tr>
                             <td> <?php echo $row['id']; ?> </td>
                             <td> <?php echo $row['name']; ?> </td>
-                            <td><?php echo $row['description']; ?> </td>
+                            <td><?php echo substr($row['description'],0,60); ?></td>
                             <td> <img src="<?php echo "../../../uploade-images/" .$row['image']; ?>" style = "width: 35px; height: 35px; border-radius: 0;" alt=""> </td>
                             <td> <?php echo $row['stars']; ?> </td>
                             <td> 
@@ -53,10 +52,7 @@
                             </td>
                           </tr>
                         </tbody>
-                            <?php
-                        }
-                    }
-                    ?>     
+                        <?php } ?>
                       </table>
                     </div>
                   </div>

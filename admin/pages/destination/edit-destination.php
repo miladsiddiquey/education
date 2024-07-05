@@ -1,18 +1,65 @@
 <?php
-include '../../../admin/config.php';
+include "../navbar/navbar.php";
+include "../../../database/database.php";
 
-if(isset($_GET['id'])) {
+$obj = new Database();
+
+if (isset($_GET['id'])) {
     $id = $_GET['id'];
-    $select = "SELECT * FROM destinationpost WHERE id='$id'";
-    $data = mysqli_query($con, $select);
-    $row = mysqli_fetch_array($data);
+    // Fetch the specific record for the given ID
+    $obj->select('destinationpost', '*', null, "id=$id", null, null);
+    $result = $obj->getResult();
+    if (count($result) > 0) {
+        $row = $result[0];
+    } else {
+        echo "No record found for the given ID";
+        exit;
+    }
 } else {
     echo "ID parameter is missing";
-    exit; // Stop further execution if ID is not set
+    exit;
+}
+
+if (isset($_POST['update_btn'])) {
+    $title = $_POST['title'];
+    $para = $_POST['paragraph'];
+    $filename = $_FILES['image']['name'];
+    $tempfile = $_FILES['image']['tmp_name'];
+    $folder = "../../../uploade-images/" . $filename;
+
+    $update_data = [
+        'title' => $title,
+        'paragraph' => $para,
+    ];
+
+    // Only add image to update data if a file is uploaded
+    if (!empty($filename)) {
+        $update_data['image'] = $filename;
+    }
+
+    $obj->update('destinationpost', $update_data, "id=$id");
+    $result = $obj->getResult();
+
+    if ($result) {
+        if (!empty($filename)) {
+            move_uploaded_file($tempfile, $folder);
+        }
+        ?>
+        <script>
+            alert("Data updated successfully");
+            window.open('http://localhost/education/admin/pages/destination/list-destination.php', '_self');
+        </script>
+        <?php
+    } else {
+        $error = $obj->getResult();
+        ?>
+        <script>
+            alert("Please try again. Error: <?php echo json_encode($error); ?>");
+        </script>
+        <?php
+    }
 }
 ?>
-
-<?php include "../navbar/navbar.php";?>
             <!-- partial -->
             <div class="main-panel">
                 <div class="content-wrapper">
@@ -54,53 +101,11 @@ if(isset($_GET['id'])) {
                                                 style="width: 35px; height: 35px; border-radius: 0;" alt="">
                                         </div>
 
-                                        <button type="submit" name="update-btn"
+                                        <button type="submit" name="update_btn"
                                             class="btn btn-primary mr-2">Update</button>
 
                                     </form>
-                                    <?php
-if(isset($_POST['update-btn'])){
-  include "../../../admin/config.php";
-  $title =mysqli_real_escape_string($con, $_POST['title']);
-  $para =mysqli_real_escape_string($con, $_POST['paragraph']);
-  $filename = $_FILES['image']['name'];
-  $old_image = $_POST['old_image'];
-  $tempfile = $_FILES['image']['tmp_name'];
-  $folder = "../../../uploade-images/".$filename;
-
-  if($filename !=''){
-    $update_filename = $filename;
-  }else{
-    $update_filename = $old_image;
-  }
-  
-  $sql = "UPDATE destinationpost SET title = '$title', paragraph = '$para', image = '$update_filename' WHERE id = '$id' ";
-  $result  =mysqli_query($con, $sql);
-  
-
-  if($result){
-    if($_FILES['image']['name'] !=''){
-      move_uploaded_file($_FILES['image']['tmp_name'],"../../../uploade-images/".$_FILES['image']['name']);
-      unlink("../../../uploade-images/".$old_image);
-    }
-    ?>
-                                    <script>
-                                    alert("data Update successfully");
-                                    window.open(
-                                        'http://localhost/education/admin/pages/destination/list-destination.php',
-                                        '_self');
-                                    </script>
-                                    <?php
-}else{
-    ?>
-                                    <script>
-                                    alert("Please try again");
-                                    </script>
-                                    <?php
-}
-
-}
-?>
+                                    
                                 </div>
                             </div>
                         </div>

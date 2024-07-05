@@ -32,14 +32,13 @@
                           </tr>
                           </thead>
                           <?php 
-                    include '../../config.php';
-                    $sql = "SELECT * FROM allcolleges";
-                    $data = mysqli_query($con, $sql);
-                    $result = mysqli_num_rows($data);
-
-                    if($result){
-                        while($row=mysqli_fetch_array($data)){
-                            ?>
+                    include "../../../database/database.php";
+                    $obj = new Database();
+                    $limit = 2;
+                    $obj->select('allcolleges', '*', null, null, null, $limit);
+                    $result = $obj->getResult();
+                    foreach ($result as $row) {
+                  ?>
                         <tbody>
                           <tr>
                             <td> <?php echo $row['id']; ?> </td>
@@ -53,10 +52,7 @@
                             </td>
                           </tr>
                         </tbody>
-                            <?php
-                        }
-                    }
-                    ?>     
+                        <?php } ?>
                       </table>
                     </div>
                   </div>

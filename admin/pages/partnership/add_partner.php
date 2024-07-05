@@ -5,14 +5,12 @@ include "../../../database/database.php";
 $obj = new Database();
 
 if (isset($_POST['submit'])) {
-    $title = $_POST['title'];
     $para = $_POST['paragraph'];
     $filename = $_FILES['image']['name'];
     $tempfile = $_FILES['image']['tmp_name'];
     $folder = "../../../uploade-images/" . $filename;
 
-    $obj->insert('destinationpost', [
-        'title' => $title,
+    $obj->insert('partner_admission', [
         'paragraph' => $para,
         'image' => $filename
     ]);
@@ -23,7 +21,7 @@ if (isset($_POST['submit'])) {
         ?>
         <script>
             alert("Data added successfully");
-            window.open('http://localhost/education/admin/pages/destination/list-destination.php', '_self');
+            window.open('http://localhost/education/admin/pages/partnership/list_partner.php', '_self');
         </script>
         <?php
     } else {
@@ -36,8 +34,9 @@ if (isset($_POST['submit'])) {
     }
 }
 ?>
-        <!-- partial -->
-        <div class="main-panel">
+
+<!-- partial -->
+<div class="main-panel">
           <div class="content-wrapper">
             <div class="page-header">
               <h3 class="page-title"> Form elements </h3>
@@ -52,33 +51,21 @@ if (isset($_POST['submit'])) {
               <div class="col-12 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
-                    <h4 class="card-title">Destination Post</h4>
+                    <h4 class="card-title">Admission Support & Partner</h4>
                     <p class="card-description"> Basic form elements </p>
                     <!-- post form -->
-                    <form class="forms-sample" action="add-destination.php" method="post" enctype="multipart/form-data" >
-                      <div class="form-group">
-                        <label for="exampleInputName1">Title</label>
-                        <input type="text" name="title" class="form-control" id="exampleInputName1" placeholder="Title">
-                      </div>
+                    <form class="forms-sample" action="add_partner.php" method="post" enctype="multipart/form-data" >
+                      
                       <div class="form-group">
                         <label for="exampleInputEmail3">Paragraph</label>
                         <textarea type="text" name="paragraph" class="form-control" id="exampleInputEmail3"  rows="5"></textarea>
                       </div>
+                      
                       <div class="form-group">
-                        <label for="exampleInputEmail3">Image</label>
+                        <label for="exampleInputEmail3">Partner Brand</label>
                         <input type="file" name="image" class="form-control" id="exampleInputEmail3" placeholder="Paragraph">
                       </div>
-                      <!-- <div class="form-group">
-                        <label>Image upload</label>
-                        <input type="file" name="image" class="file-upload-default">
-                        <div class="input-group col-xs-12">
-                          <input type="file" name="image" class="form-control file-upload-info" disabled placeholder="Upload Image">
-                          <span class="input-group-append">
-                            <button class="file-upload-browse btn btn-primary" type="submit" name="submit">Upload</button>
-                          </span>
-                        </div>
-                      </div> -->
-                      
+
                       <button type="submit" name="submit" class="btn btn-primary mr-2">Submit</button>
 
                     </form>

@@ -1,19 +1,21 @@
 <?php
-include '../../config.php';
+include "../../../database/database.php";
+$obj = new Database();
 
-$id = $_GET['id']; // Ensure the id is an integer for security
+$id = (int)$_GET['id'];
 if ($id > 0) {
-    // Retrieve the image filename
-    $query = "SELECT image FROM allcolleges WHERE id = '$id'";
-    $result = mysqli_query($con, $query);
+    
+    $obj->select('allcolleges', '*', null, "id='$id'", null, null);
+    $result = $obj->getResult();
 
-    if ($result && mysqli_num_rows($result) > 0) {
-        $row = mysqli_fetch_assoc($result);
+    if ($result && count($result) > 0) {
+        $row = $result[0];
         $image = $row['image'];
 
+        $deleteQuery = "DELETE FROM allcolleges WHERE id='$id'";
+
         // Delete the record from the database
-        $deleteQuery = "DELETE FROM allcolleges WHERE id = '$id'";
-        $deleteResult = mysqli_query($con, $deleteQuery);
+        $deleteResult = $obj->delete('allcolleges', "id='$id'");
 
         if ($deleteResult) {
             // Delete the image file from the server
@@ -48,5 +50,3 @@ if ($id > 0) {
     <?php
 }
 ?>
-
-

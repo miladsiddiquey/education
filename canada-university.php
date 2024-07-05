@@ -171,7 +171,27 @@
             <li>Visit Now</li>
           </ul>
 
+          <?php 
+                    include "./database/database.php";
+                    $obj = new Database();
+                    $limit = 10;
+                    $obj->select('top_university', '*', null, null, null, $limit);
+                    $result = $obj->getResult();
+
+                    
+                   
+                    foreach ($result as $row) {
+                  ?>
+
           <ul class="top-list-table-body">
+            <li><?= $row['global_ranking']; ?></li>
+            <li><?= $row['university_name']; ?></li>
+            <li><?= $row['student_no']; ?></li>
+            <li><?= $row['courses_no']; ?></li>
+            <li><a href="#">View Details</a></li>
+          </ul>
+          <?php } ?>
+          <!-- <ul class="top-list-table-body">
             <li>100</li>
             <li>University 1</li>
             <li>100+</li>
@@ -233,14 +253,7 @@
             <li>100+</li>
             <li>200+</li>
             <li><a href="#">View Details</a></li>
-          </ul>
-          <ul class="top-list-table-body">
-            <li>100</li>
-            <li>University 1</li>
-            <li>100+</li>
-            <li>200+</li>
-            <li><a href="#">View Details</a></li>
-          </ul>
+          </ul> -->
         </div>
       </div>
     </div>

@@ -7,7 +7,7 @@ $obj = new Database();
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
     // Fetch the specific record for the given ID
-    $obj->select('allcolleges', '*', null, "id=$id", null, null);
+    $obj->select('partner_admission', '*', null, "id=$id", null, null);
     $result = $obj->getResult();
     if (count($result) > 0) {
         $row = $result[0];
@@ -21,17 +21,15 @@ if (isset($_GET['id'])) {
 }
 
 if (isset($_POST['update_btn'])) {
-    $title = $_POST['title'];
     $paragraph = $_POST['paragraph'];
-    $category = $_POST['category'];
     $filename = $_FILES['image']['name'];
     $tempfile = $_FILES['image']['tmp_name'];
     $folder = "../../../uploade-images/" . $filename;
 
     $update_data = [
-        'title' => $title,
-        'paragraph' => $paragraph,
-        'category' => $category,
+    
+        'paragraph' => $paragraph
+        
     ];
 
     // Only add image to update data if a file is uploaded
@@ -39,7 +37,7 @@ if (isset($_POST['update_btn'])) {
         $update_data['image'] = $filename;
     }
 
-    $obj->update('allcolleges', $update_data, "id=$id");
+    $obj->update('partner_admission', $update_data, "id=$id");
     $result = $obj->getResult();
 
     if ($result) {
@@ -49,7 +47,7 @@ if (isset($_POST['update_btn'])) {
         ?>
         <script>
             alert("Data updated successfully");
-            window.open('http://localhost/education/admin/pages/allcolleges/list-col.php', '_self');
+            window.open('http://localhost/education/admin/pages/partnership/list_partner.php', '_self');
         </script>
         <?php
     } else {
@@ -78,31 +76,18 @@ if (isset($_POST['update_btn'])) {
                         <div class="col-12 grid-margin stretch-card">
                             <div class="card">
                                 <div class="card-body">
-                                    <h4 class="card-title">Destination Post</h4>
+                                    <h4 class="card-title">Admission Support & Partner</h4>
                                     <p class="card-description"> Basic form elements </p>
                                     <!-- post form -->
-                                    <form class="forms-sample" action="edit-col.php?id=<?php echo $row['id'] ?>"
+                                    <form class="forms-sample" action="edit_partner.php?id=<?php echo $row['id'] ?>"
                                         method="post" enctype="multipart/form-data">
-                                        <div class="form-group">
-                                            <label for="exampleInputName1">Title</label>
-                                            <input type="text" name="title" class="form-control" id="exampleInputName1"
-                                                value="<?php echo $row['title'] ?>">
-                                        </div>
+                                        
                                         <div class="form-group">
                                             <label for="exampleInputEmail3">Paragraph</label>
                                             <input type="text" name="paragraph" class="form-control"
                                                 id="exampleInputEmail3" value="<?php echo $row['paragraph'] ?>">
                                         </div>
-                                        <div class="form-group">
-                            <label >Category</label>
-                            <div class="col-sm-3">
-                              <select class="form-control" name="category" >
-                                <option value="college">College</option>
-                                <option value="university">University</option>
-                                <option value="province">Province</option>
-                              </select>
-                            </div>
-                          </div>
+                                        
                                         <div class="form-group">
                                             <label for="exampleInputEmail3">Image</label>
                                             <input type="file" name="image" class="form-control" id="exampleInputEmail3"

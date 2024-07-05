@@ -5,17 +5,17 @@ $obj = new Database();
 $id = (int)$_GET['id'];
 if ($id > 0) {
     
-    $obj->select('destinationpost', '*', null, "id='$id'", null, null);
+    $obj->select('partner_admission', '*', null, "id='$id'", null, null);
     $result = $obj->getResult();
 
     if ($result && count($result) > 0) {
         $row = $result[0];
         $image = $row['image'];
 
-        $deleteQuery = "DELETE FROM destinationpost WHERE id='$id'";
+        $deleteQuery = "DELETE FROM partner_admission WHERE id='$id'";
 
         // Delete the record from the database
-        $deleteResult = $obj->delete('destinationpost', "id='$id'");
+        $deleteResult = $obj->delete('partner_admission', "id='$id'");
 
         if ($deleteResult) {
             // Delete the image file from the server
@@ -25,7 +25,7 @@ if ($id > 0) {
             ?>
             <script>
                 alert("Data deleted successfully");
-                window.open('http://localhost/education/admin/pages/destination/list-destination.php', '_self');
+                window.open('http://localhost/education/admin/pages/partnership/list_partner.php', '_self');
             </script>
             <?php
         } else {

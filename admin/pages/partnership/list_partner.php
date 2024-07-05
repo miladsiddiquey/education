@@ -1,9 +1,9 @@
-<?php include "../navbar/navbar.php" ?>
+<?php include "../navbar/navbar.php";?>
         <!-- partial -->
         <div class="main-panel">
           <div class="content-wrapper">
             <div class="page-header">
-              <h3 class="page-title"> Form elements </h3>
+            <a href="./add_partner.php" class="btn btn-primary mr-2">Add Partner & admission</a>
               <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                   <li class="breadcrumb-item"><a href="#">Forms</a></li>
@@ -24,7 +24,6 @@
                         <thead>
                           <tr>
                             <th> # </th>
-                            <th> Title </th>
                             <th> Paragraph </th>
                             <th> Image </th>
                             <th> Action </th>
@@ -33,24 +32,23 @@
                           <?php 
                     include "../../../database/database.php";
                     $obj = new Database();
-                    $limit = 4;
-                    $obj->select('destinationpost', '*', null, null, null, $limit);
+                    
+                    $obj->select('partner_admission', '*', null, null, null, null);
                     $result = $obj->getResult();
                     foreach ($result as $row) {
                   ?>
                         <tbody>
                           <tr>
                             <td> <?php echo $row['id']; ?> </td>
-                            <td> <?php echo $row['title']; ?> </td>
-                            <td><?php echo substr($row['paragraph'],60); ?> </td>
+                            <td><?php echo substr($row['paragraph'],0,60); ?> </td>
                             <td> <img src="<?php echo "../../../uploade-images/" .$row['image']; ?>" style = "width: 35px; height: 35px; border-radius: 0;" alt=""> </td>
                             <td> 
-                            <a href="./edit-destination.php ?id=<?php echo $row['id'];?>" style="font-size: 20px; padding-right: 10px;"><i class="mdi mdi-lead-pencil"></i></a>
-                            <a onclick="return confirm('Are you sure!')" href="./delate-destination.php ?id=<?php echo $row['id'];?>" style="font-size: 20px; padding-left: 10px;"><i class="mdi mdi-delete"></i></a>
+                            <a href="./edit_partner.php?id=<?php echo $row['id'];?>" style="font-size: 20px; padding-right: 10px;"><i class="mdi mdi-lead-pencil"></i></a>
+                            <a onclick="return confirm('Are you sure!')" href="./delate_partner.php?id=<?php echo $row['id'];?>" style="font-size: 20px; padding-left: 10px;"><i class="mdi mdi-delete"></i></a>
                             </td>
                           </tr>
                         </tbody>
-                        <?php } ?> 
+                        <?php } ?>
                       </table>
                     </div>
                   </div>

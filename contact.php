@@ -16,6 +16,11 @@
     <link rel="stylesheet" href="css/tiny-slider.css" />
     <!-- <link rel="stylesheet" href="/css/tom-select.default.css" /> -->
     <link rel="stylesheet" href="css/style.css" />
+    <script>
+      if(window.history.replaceState){
+        window.history.replaceState(null, null, window.location.href);
+      }
+    </script>
   </head>
 
   <body>
@@ -127,7 +132,34 @@
     <!-- =================== top banner ewnd======================= -->
 
     <!-- ========================= home contact ============================ -->
+    <?php
+    include "./database/database.php";
+$obj = new Database();
+$show = false;
 
+if (isset($_POST['submit'])) {
+    $name = $_POST['name'];
+    $email = $_POST['email'];
+    $subject = $_POST['subject'];
+    $message = $_POST['message'];
+    
+    $obj->insert('contact_info', [
+        'name' => $name,
+        'email' => $email,
+        'subject' => $subject,
+        'message' => $message
+    ]);
+    $result = $obj->getResult();
+
+    if ($result) {
+        $show = true;
+       
+    } else {
+        $error = $obj->getResult();
+      
+    }
+}
+?>
     <div class="home-contact">
       <div class="container">
         <div class="home-contact-content grid-2">
@@ -172,47 +204,32 @@
               </div>
             </div>
           </div>
-          <div class="home-contact-left">
-            <h2>Write Us</h2>
-            <form method="post" action="">
-              <div class="form-input">
-                <input
-                  type="text"
-                  name="name"
-                  id="name"
-                  placeholder="Your Name* "
-                  required
-                />
-              </div>
-              <div class="form-input">
-                <input
-                  type="email"
-                  name="email"
-                  id="email"
-                  placeholder="Your Email* "
-                  required
-                />
-              </div>
-              <div class="form-input">
-                <input
-                  type="text"
-                  name="sub"
-                  id="sub"
-                  placeholder="Subject* "
-                  required
-                />
-              </div>
-              <div class="form-input">
-                <textarea
-                  name="message"
-                  id="message"
-                  placeholder="Write Your Message"
-                ></textarea>
-              </div>
 
-              <button type="submit">Submit</button>
-            </form>
-          </div>
+
+          <div class="home-contact-left">
+        <?php if (!$show): ?>
+            <h2>Write Us</h2>
+            <form method="post" action="contact.php" id="show">
+                    <div class="form-input">
+                        <input type="text" name="name" id="name" placeholder="Your Name*" required />
+                    </div>
+                    <div class="form-input">
+                        <input type="email" name="email" id="email" placeholder="Your Email*" required />
+                    </div>
+                    <div class="form-input">
+                        <input type="text" name="subject" id="subject" placeholder="Subject*" required />
+                    </div>
+                    <div class="form-input">
+                        <textarea name="message" id="message" placeholder="Write Your Message"></textarea>
+                    </div>
+                    <button name="submit" type="submit">Submit</button>
+              </form>
+              <?php else: ?>
+                    <div id="thankYouMessage">
+                        <h2 style="color:green; text-align:center">Thank you!<br> Your message has been submitted.</h2>
+                    </div>
+                <?php endif; ?>
+        </div>
         </div>
       </div>
     </div>

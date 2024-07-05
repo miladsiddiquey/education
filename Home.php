@@ -19,6 +19,11 @@ $obj = new Database();
     <link rel="stylesheet" href="css/tiny-slider.css" />
     <!-- <link rel="stylesheet" href="/css/tom-select.default.css" /> -->
     <link rel="stylesheet" href="css/style.css" />
+    <script>
+      if(window.history.replaceState){
+        window.history.replaceState(null, null, window.location.href);
+      }
+    </script>
   </head>
 
   <body>
@@ -154,7 +159,7 @@ $obj = new Database();
         <div class="top-banner-content text-center">
           <div class="top-banner-btn d-flex gap-4 justify-content-center">
             <a href="#" class="btn-main">Register For IELTS</a>
-            <a href="#" class="btn-white">Contact Our Team</a>
+            <a href="./contact.php" class="btn-white">Contact Our Team</a>
           </div>
         </div>
       </div>
@@ -545,6 +550,7 @@ $obj = new Database();
     
     $obj->select('review', '*', null, null, null, null);
     $result = $obj->getResult();
+   
 
       foreach ($result as $row) {
       ?>
@@ -552,11 +558,22 @@ $obj = new Database();
           <div class="home-review-slide">
             <div class="home-review-box"> 
               <div class="review-star">
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
+
+              <?php
+               $start = 1;
+                while ($start <= 5) {
+                  if($row['stars'] < $start){
+                    ?>
+                        <i class="fa-regular fa-star"></i>
+                    <?php
+                  }else{
+                    ?>
+                      <i class="fa-solid fa-star"></i>
+                    <?php
+                  }
+                  $start++;
+                }
+              ?> 
               </div>
                 <p><?php echo $row['description'];?></p>
               <div class="home-review-box-profile d-flex align-items-center">
@@ -599,41 +616,18 @@ $obj = new Database();
         </div>
 
         <div class="home-partner-content">
+                <?php 
+                $obj->select('partner_admission', '*', null, null, null, null);
+                $result = $obj->getResult();
+                $first = true;
+                foreach ($result as $row) {
+                ?>
           <div class="partner-box-slide">
             <div class="home-partner-box">
-              <img src="img/company.png" alt="img" />
+              <img src="<?php echo "./uploade-images/" .$row['image']; ?>" alt="img" />
             </div>
           </div>
-          <div class="partner-box-slide">
-            <div class="home-partner-box">
-              <img src="img/company.png" alt="img" />
-            </div>
-          </div>
-          <div class="partner-box-slide">
-            <div class="home-partner-box">
-              <img src="img/company.png" alt="img" />
-            </div>
-          </div>
-          <div class="partner-box-slide">
-            <div class="home-partner-box">
-              <img src="img/company.png" alt="img" />
-            </div>
-          </div>
-          <div class="partner-box-slide">
-            <div class="home-partner-box">
-              <img src="img/company.png" alt="img" />
-            </div>
-          </div>
-          <div class="partner-box-slide">
-            <div class="home-partner-box">
-              <img src="img/company.png" alt="img" />
-            </div>
-          </div>
-          <div class="partner-box-slide">
-            <div class="home-partner-box">
-              <img src="img/company.png" alt="img" />
-            </div>
-          </div>
+          <?php } ?>
         </div>
       </div>
     </div>
@@ -649,276 +643,43 @@ $obj = new Database();
         </div>
         <div class="home-faq-content">
           <div class="accordion" id="accordionExample">
-            <div class="accordion-item">
-              <h2 class="accordion-header" id="headingOne">
-                <button
-                  class="accordion-button"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#collapseOne"
-                  aria-expanded="true"
-                  aria-controls="collapseOne"
-                >
-                  Lorem ipsum is placeholder text ?
-                </button>
-              </h2>
-              <div
-                id="collapseOne"
-                class="accordion-collapse collapse show"
-                aria-labelledby="headingOne"
-                data-bs-parent="#accordionExample"
-              >
-                <div class="accordion-body">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                  laboris nisi ut aliquip ex ea commodo consequat.
+
+               <?php 
+                $obj->select('question', '*', null, null, null, null);
+                $result = $obj->getResult();
+                $first = true;
+                foreach ($result as $row) {
+                ?>
+                
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="heading<?= $row['id'] ?>">
+                        <button
+                            class="accordion-button <?= $first ? '' : 'collapsed' ?>" 
+                            type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#collapse<?= $row['id'] ?>"
+                            aria-expanded="<?= $first ? 'true' : 'false' ?>" 
+                            aria-controls="collapse<?= $row['id'] ?>"
+                        >
+                            <?= htmlspecialchars($row['question']) ?>
+                        </button>
+                    </h2>
+                    <div
+                        id="collapse<?= $row['id'] ?>"
+                        class="accordion-collapse collapse <?= $first ? 'show' : '' ?>" 
+                        aria-labelledby="heading<?= $row['id'] ?>"
+                        data-bs-parent="#accordionExample"
+                    >
+                        <div class="accordion-body">
+                            <?= htmlspecialchars($row['answer']) ?>
+                        </div>
+                    </div>
                 </div>
-              </div>
-            </div>
-            <div class="accordion-item">
-              <h2 class="accordion-header" id="headingTwo">
-                <button
-                  class="accordion-button collapsed"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#collapseTwo"
-                  aria-expanded="false"
-                  aria-controls="collapseTwo"
-                >
-                  Lorem ipsum is placeholder text ?
-                </button>
-              </h2>
-              <div
-                id="collapseTwo"
-                class="accordion-collapse collapse"
-                aria-labelledby="headingTwo"
-                data-bs-parent="#accordionExample"
-              >
-                <div class="accordion-body">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                  laboris nisi ut aliquip ex ea commodo consequat.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item">
-              <h2 class="accordion-header" id="headingThree">
-                <button
-                  class="accordion-button collapsed"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#collapseThree"
-                  aria-expanded="false"
-                  aria-controls="collapseThree"
-                >
-                  Lorem ipsum is placeholder text ?
-                </button>
-              </h2>
-              <div
-                id="collapseThree"
-                class="accordion-collapse collapse"
-                aria-labelledby="headingThree"
-                data-bs-parent="#accordionExample"
-              >
-                <div class="accordion-body">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                  laboris nisi ut aliquip ex ea commodo consequat.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item">
-              <h2 class="accordion-header" id="heading4">
-                <button
-                  class="accordion-button collapsed"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#collapse4"
-                  aria-expanded="false"
-                  aria-controls="collapse4"
-                >
-                  Lorem ipsum is placeholder text ?
-                </button>
-              </h2>
-              <div
-                id="collapse4"
-                class="accordion-collapse collapse"
-                aria-labelledby="heading4"
-                data-bs-parent="#accordionExample"
-              >
-                <div class="accordion-body">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                  laboris nisi ut aliquip ex ea commodo consequat.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item">
-              <h2 class="accordion-header" id="heading5">
-                <button
-                  class="accordion-button collapsed"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#collapse5"
-                  aria-expanded="false"
-                  aria-controls="collapse6"
-                >
-                  Lorem ipsum is placeholder text ?
-                </button>
-              </h2>
-              <div
-                id="collapse6"
-                class="accordion-collapse collapse"
-                aria-labelledby="heading6"
-                data-bs-parent="#accordionExample"
-              >
-                <div class="accordion-body">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                  laboris nisi ut aliquip ex ea commodo consequat.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item">
-              <h2 class="accordion-header" id="heading7">
-                <button
-                  class="accordion-button collapsed"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#collapse7"
-                  aria-expanded="false"
-                  aria-controls="collapse7"
-                >
-                  Lorem ipsum is placeholder text ?
-                </button>
-              </h2>
-              <div
-                id="collapse7"
-                class="accordion-collapse collapse"
-                aria-labelledby="heading7"
-                data-bs-parent="#accordionExample"
-              >
-                <div class="accordion-body">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                  laboris nisi ut aliquip ex ea commodo consequat.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item">
-              <h2 class="accordion-header" id="heading8">
-                <button
-                  class="accordion-button collapsed"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#collapse8"
-                  aria-expanded="false"
-                  aria-controls="collapse8"
-                >
-                  Lorem ipsum is placeholder text ?
-                </button>
-              </h2>
-              <div
-                id="collapse8"
-                class="accordion-collapse collapse"
-                aria-labelledby="heading8"
-                data-bs-parent="#accordionExample"
-              >
-                <div class="accordion-body">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                  laboris nisi ut aliquip ex ea commodo consequat.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item">
-              <h2 class="accordion-header" id="heading9">
-                <button
-                  class="accordion-button collapsed"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#collapse9"
-                  aria-expanded="false"
-                  aria-controls="collapse9"
-                >
-                  Lorem ipsum is placeholder text ?
-                </button>
-              </h2>
-              <div
-                id="collapse9"
-                class="accordion-collapse collapse"
-                aria-labelledby="heading9"
-                data-bs-parent="#accordionExample"
-              >
-                <div class="accordion-body">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                  laboris nisi ut aliquip ex ea commodo consequat.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item">
-              <h2 class="accordion-header" id="heading10">
-                <button
-                  class="accordion-button collapsed"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#collapse10"
-                  aria-expanded="false"
-                  aria-controls="collapse10"
-                >
-                  Lorem ipsum is placeholder text ?
-                </button>
-              </h2>
-              <div
-                id="collapse10"
-                class="accordion-collapse collapse"
-                aria-labelledby="heading10"
-                data-bs-parent="#accordionExample"
-              >
-                <div class="accordion-body">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                  laboris nisi ut aliquip ex ea commodo consequat.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item">
-              <h2 class="accordion-header" id="heading11">
-                <button
-                  class="accordion-button collapsed"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#collapse11"
-                  aria-expanded="false"
-                  aria-controls="collapse11"
-                >
-                  Lorem ipsum is placeholder text ?
-                </button>
-              </h2>
-              <div
-                id="collapse11"
-                class="accordion-collapse collapse"
-                aria-labelledby="heading11"
-                data-bs-parent="#accordionExample"
-              >
-                <div class="accordion-body">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                  laboris nisi ut aliquip ex ea commodo consequat.
-                </div>
-              </div>
-            </div>
+                
+                <?php 
+
+                $first = false;
+                } ?>
           </div>
         </div>
       </div>
@@ -927,51 +688,63 @@ $obj = new Database();
     <!--================================== home faq end====================  -->
 
     <!-- ========================= home contact ============================ -->
+    <?php
+$obj = new Database();
+$show = false;
 
-    <div class="home-contact">
+if (isset($_POST['submit'])) {
+    $name = $_POST['name'];
+    $email = $_POST['email'];
+    $subject = $_POST['subject'];
+    $message = $_POST['message'];
+    
+    $obj->insert('contact_info', [
+        'name' => $name,
+        'email' => $email,
+        'subject' => $subject,
+        'message' => $message
+    ]);
+    $result = $obj->getResult();
+
+    if ($result) {
+        $show = true;
+       
+    } else {
+        $error = $obj->getResult();
+      
+    }
+}
+?>
+    <div class="home-contact" id="#homeContact">
       <div class="container">
         <div class="home-contact-content grid-2">
-          <div class="home-contact-left">
-            <h2>Write Us</h2>
-            <form method="post" action="">
-              <div class="form-input">
-                <input
-                  type="text"
-                  name="name"
-                  id="name"
-                  placeholder="Your Name* "
-                  required
-                />
-              </div>
-              <div class="form-input">
-                <input
-                  type="email"
-                  name="email"
-                  id="email"
-                  placeholder="Your Email* "
-                  required
-                />
-              </div>
-              <div class="form-input">
-                <input
-                  type="text"
-                  name="sub"
-                  id="sub"
-                  placeholder="Subject* "
-                  required
-                />
-              </div>
-              <div class="form-input">
-                <textarea
-                  name="message"
-                  id="message"
-                  placeholder="Write Your Message"
-                ></textarea>
-              </div>
 
-              <button type="submit">Submit</button>
-            </form>
-          </div>
+        <div class="home-contact-left">
+        <?php if (!$show): ?>
+            <h2>Write Us</h2>
+            <form method="post" action="Home.php" id="show">
+                    <div class="form-input">
+                        <input type="text" name="name" id="name" placeholder="Your Name*" required />
+                    </div>
+                    <div class="form-input">
+                        <input type="email" name="email" id="email" placeholder="Your Email*" required />
+                    </div>
+                    <div class="form-input">
+                        <input type="text" name="subject" id="subject" placeholder="Subject*" required />
+                    </div>
+                    <div class="form-input">
+                        <textarea name="message" id="message" placeholder="Write Your Message"></textarea>
+                    </div>
+                    <button name="submit" type="submit">Submit</button>
+              </form>
+              <?php else: ?>
+                    <div id="thankYouMessage">
+                        <h2 style="color:green; text-align:center">Thank you!<br> Your message has been submitted.</h2>
+                    </div>
+                <?php endif; ?>
+        </div>
+
+
           <div class="home-contact-right">
             <h2>Contact Information</h2>
             <h4>We are open for any suggestions or just a chat</h4>
@@ -1013,6 +786,8 @@ $obj = new Database();
               </div>
             </div>
           </div>
+
+          
         </div>
       </div>
     </div>
@@ -1122,6 +897,8 @@ $obj = new Database();
         },
       });
     </script> -->
+ 
+
 
     <script>
       const bannerControl = document.querySelector("#destination-control");

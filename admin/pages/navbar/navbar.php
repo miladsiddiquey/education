@@ -207,25 +207,14 @@ include '../../login-session.php';
                 <li class="nav-item"> <a class="nav-link" href="../users/list-user.php">List user</a></li>
               </ul>
             </div>
-          </li>
-          <!-- <li class="nav-item menu-items">
-            <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
-              <span class="menu-icon">
-                <i class="mdi mdi-security"></i>
-              </span>
-              <span class="menu-title">User Pages</span>
-              <i class="menu-arrow"></i>
-            </a>
-            <div class="collapse" id="auth">
-              <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="pages/samples/blank-page.php"> Blank Page </a></li>
-                <li class="nav-item"> <a class="nav-link" href="pages/samples/error-404.php"> 404 </a></li>
-                <li class="nav-item"> <a class="nav-link" href="pages/samples/error-500.php"> 500 </a></li>
-                <li class="nav-item"> <a class="nav-link" href="pages/samples/login.php"> Login </a></li>
-                <li class="nav-item"> <a class="nav-link" href="pages/samples/register.php"> Register </a></li>
-              </ul>
+            <div>
+            <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="../partnership/list_partner.php">Admission & Partner</a></li>
+                <li class="nav-item"> <a class="nav-link" href="../contactInfo/list_contact.php">List Contact</a></li>
+            </ul>
+            
             </div>
-          </li> -->
+          </li>
         </ul>
       </nav>
       <!-- partial -->

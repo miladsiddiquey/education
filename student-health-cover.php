@@ -150,8 +150,8 @@
 
         <div class="top-banner-content text-center">
           <div class="top-banner-btn d-flex gap-4 justify-content-center">
-            <a href="#" class="btn-main">Register For IELTS</a>
-            <a href="#" class="btn-white">Contact Our Team</a>
+          <a href="./university-page.php" class="btn-main">View University</a>
+          <a href="./contact.php" class="btn-white">Contact Our Team</a>
           </div>
         </div>
       </div>

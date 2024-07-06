@@ -94,7 +94,7 @@
                   </li>
                 </ul>
               </li>
-              <li><a href="contact.php" class="contact-btn">Contact</a></li>
+              <li><a href="./contact.php" class="contact-btn">Contact</a></li>
             </ul>
 
             <i class="fa-solid fa-bars" id="menu-bar"></i>
@@ -467,8 +467,8 @@
           </div>
 
           <div class="university-body-btn">
-            <a href="#" class="btn-white">Contact Now</a>
-            <a href="#" class="btn-main">Admission Help</a>
+            <a href="./contact.php" class="btn-white">Contact Now</a>
+            <a href="./contact.php" class="btn-main">Admission Help</a>
           </div>
         </div>
       </div>

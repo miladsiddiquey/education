@@ -191,69 +191,7 @@
             <li><a href="#">View Details</a></li>
           </ul>
           <?php } ?>
-          <!-- <ul class="top-list-table-body">
-            <li>100</li>
-            <li>University 1</li>
-            <li>100+</li>
-            <li>200+</li>
-            <li><a href="#">View Details</a></li>
-          </ul>
-          <ul class="top-list-table-body">
-            <li>100</li>
-            <li>University 1</li>
-            <li>100+</li>
-            <li>200+</li>
-            <li><a href="#">View Details</a></li>
-          </ul>
-          <ul class="top-list-table-body">
-            <li>100</li>
-            <li>University 1</li>
-            <li>100+</li>
-            <li>200+</li>
-            <li><a href="#">View Details</a></li>
-          </ul>
-          <ul class="top-list-table-body">
-            <li>100</li>
-            <li>University 1</li>
-            <li>100+</li>
-            <li>200+</li>
-            <li><a href="#">View Details</a></li>
-          </ul>
-          <ul class="top-list-table-body">
-            <li>100</li>
-            <li>University 1</li>
-            <li>100+</li>
-            <li>200+</li>
-            <li><a href="#">View Details</a></li>
-          </ul>
-          <ul class="top-list-table-body">
-            <li>100</li>
-            <li>University 1</li>
-            <li>100+</li>
-            <li>200+</li>
-            <li><a href="#">View Details</a></li>
-          </ul>
-          <ul class="top-list-table-body">
-            <li>100</li>
-            <li>University 1</li>
-            <li>100+</li>
-            <li>200+</li>
-            <li><a href="#">View Details</a></li>
-          </ul>
-          <ul class="top-list-table-body">
-            <li>100</li>
-            <li>University 1</li>
-            <li>100+</li>
-            <li>200+</li>
-            <li><a href="#">View Details</a></li>
-          </ul>
-          <ul class="top-list-table-body">
-            <li>100</li>
-            <li>University 1</li>
-            <li>100+</li>
-            <li>200+</li>
-            <li><a href="#">View Details</a></li>
-          </ul> -->
+          
         </div>
       </div>
     </div>
@@ -261,7 +199,7 @@
       <div class="container">
         <div class="section-header">
           <h2 style="font-size: var(--semi-font)">
-            List of Top Universities to Study in Canada
+            List of Top Universities to Study in UK
           </h2>
         </div>
 
@@ -351,7 +289,7 @@
       <div class="container">
         <div class="section-header">
           <h2 style="font-size: var(--semi-font)">
-            List of Top Universities to Study in Canada
+            List of Top Universities to Study in Australia
           </h2>
         </div>
 
@@ -441,7 +379,7 @@
       <div class="container">
         <div class="section-header">
           <h2 style="font-size: var(--semi-font)">
-            List of Top Universities to Study in Canada
+            List of Top Universities to Study in Denmark
           </h2>
         </div>
 

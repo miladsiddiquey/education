@@ -117,48 +117,49 @@ $obj = new Database();
     <!-- =================== top banner ======================= -->
 
     <main class="top-banner" style="background: url(./img/top-banner.png)">
-      <div class="container">
-        <div class="top-banner-header text-center">
-          <h3>Welcome to</h3>
-          <h2>Education 2 Success</h2>
-          <p class="mx-auto">
-            Education 2 Success is one of the best student consultancy firms in
-            Sylhet for Bangladeshi students and also a leading student services
-            provider.
-          </p>
-        </div>
+  <div class="container">
+    <div class="top-banner-header text-center">
+      <h3>Welcome to</h3>
+      <h2>Education 2 Success</h2>
+      <p class="mx-auto">
+        Education 2 Success is one of the best student consultancy firms in
+        Sylhet for Bangladeshi students and also a leading student services
+        provider.
+      </p>
+    </div>
 
-        <form action="Home.php" class="mx-auto">
-          <div class="form-input d-flex gap-2 align-items-center">
-            <i class="fa-solid fa-magnifying-glass"></i>
-            <input
-              type="text"
-              name="search"
-              id="search"
-              placeholder="Search universities"
-            />
-          </div>
-          <div class="form-input">
-            <select
-              id="select-beast"
-              placeholder="Select a person..."
-              autocomplete="off"
-            >
-              <option value="">Select Country</option>
-              <option value="4">Thomas Edison</option>
-              <option value="1">Nikola</option>
-              <option value="3">Nikola Tesla</option>
-              <option value="5">Arnold Schwarzenegger</option>
-            </select>
-          </div>
-          <button type="submit">
-            <i class="fa-solid fa-magnifying-glass"></i>
-          </button>
-        </form>
+    <form action="Home.php" method="GET" class="mx-auto">
+      <div class="form-input d-flex gap-2 align-items-center">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input
+          type="text"
+          name="search"
+          id="search"
+          placeholder="Search universities"
+        />
+      </div>
+      <div class="form-input">
+        <select
+          id="select-beast"
+          placeholder="Select a person..."
+          autocomplete="off"
+        >
+          <option value="">Select Country</option>
+          <option value="4">Thomas Edison</option>
+          <option value="1">Nikola</option>
+          <option value="3">Nikola Tesla</option>
+          <option value="5">Arnold Schwarzenegger</option>
+        </select>
+      </div>
+      <button name="submit" type="submit">
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </button>
+    </form>
+
 
         <div class="top-banner-content text-center">
           <div class="top-banner-btn d-flex gap-4 justify-content-center">
-            <a href="#" class="btn-main">Register For IELTS</a>
+            <a href="./university-page.php" class="btn-main">View University</a>
             <a href="./contact.php" class="btn-white">Contact Our Team</a>
           </div>
         </div>
@@ -169,7 +170,7 @@ $obj = new Database();
 
     <!-- ================== home service ====================== -->
 
-    <section class="home-service">
+    <section class="home-service" style="display: block;">
       <div class="container">
         <div class="section-header text-center">
           <h2>
@@ -249,7 +250,7 @@ $obj = new Database();
               <div class="card-box-text">
                 <h4><?php echo $row['title']; ?></h4>
                 <p><?php echo $row['paragraph']; ?> </p>
-                <a href="./university-page.php">Learn More <i class="fa-solid fa-arrow-right"></i
+                <a href="./Find-Destination.php">Learn More <i class="fa-solid fa-arrow-right"></i
                 ></a>
               </div>
             </div>
@@ -751,29 +752,29 @@ if (isset($_POST['submit'])) {
 
             <div class="home-contact-right-box">
               <div class="home-contact-right-box-left">
-                <i class="fa-solid fa-location-dot"></i>
+              <i class="fa-solid fa-envelope"></i>
               </div>
               <div class="home-contact-right-box-right">
-                <h5>Address</h5>
-                <small>Zindabazar Point, Sylhet City, Bangladesh</small>
+                <h5>Email</h5>
+                <small>educationtwosuccess@gmail.com</small>
               </div>
             </div>
             <div class="home-contact-right-box">
               <div class="home-contact-right-box-left">
-                <i class="fa-solid fa-location-dot"></i>
+                <i class="fa-solid fa-phone"></i>
               </div>
               <div class="home-contact-right-box-right">
-                <h5>Address</h5>
-                <small>Zindabazar Point, Sylhet City, Bangladesh</small>
+                <h5>Phone</h5>
+                <small>01788475158</small>
               </div>
             </div>
             <div class="home-contact-right-box">
               <div class="home-contact-right-box-left">
-                <i class="fa-solid fa-location-dot"></i>
+              <i class="fa-solid fa-globe"></i>
               </div>
               <div class="home-contact-right-box-right">
-                <h5>Address</h5>
-                <small>Zindabazar Point, Sylhet City, Bangladesh</small>
+                <h5>Website</h5>
+                <small>education.com</small>
               </div>
             </div>
             <div class="home-contact-right-box">

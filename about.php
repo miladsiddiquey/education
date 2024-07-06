@@ -1,4 +1,7 @@
-<!-- @format -->
+<?php
+include "./database/database.php";
+$obj = new Database();
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -150,8 +153,8 @@
 
         <div class="top-banner-content text-center">
           <div class="top-banner-btn d-flex gap-4 justify-content-center">
-            <a href="#" class="btn-main">Register For IELTS</a>
-            <a href="#" class="btn-white">Contact Our Team</a>
+            <a href="./university-page.php" class="btn-main">View University</a>
+            <a href="./contact.php" class="btn-white">Contact Our Team</a>
           </div>
         </div>
       </div>
@@ -492,87 +495,27 @@
           <h2>Meet Our Professional Team</h2>
         </div>
         <div class="home-team-content grid-4">
-          <div class="home-team-box">
+        <?php 
+    
+          $obj->select('team', '*', null, null, null, null);
+          $result = $obj->getResult();
+
+            foreach ($result as $row) {
+            ?>
+        <div class="home-team-box">
             <div class="home-team-img">
-              <img src="img/profileimg.png" alt="" />
+              <img src="<?php echo "./uploade-images/" .$row['image']; ?>" alt="" />
             </div>
             <div class="home-team-text">
-              <h4>Team Member Name</h4>
-              <small>Team Member Name</small>
+              <h4><?php echo $row['name']; ?></h4>
+              <small><?php echo $row['description']; ?></small>
               <a href="#">Read More <i class="fa-solid fa-arrow-right"></i> </a>
             </div>
           </div>
-          <div class="home-team-box">
-            <div class="home-team-img">
-              <img src="img/profileimg.png" alt="" />
-            </div>
-            <div class="home-team-text">
-              <h4>Team Member Name</h4>
-              <small>Team Member Name</small>
-              <a href="#">Read More <i class="fa-solid fa-arrow-right"></i> </a>
-            </div>
-          </div>
-          <div class="home-team-box">
-            <div class="home-team-img">
-              <img src="img/profileimg.png" alt="" />
-            </div>
-            <div class="home-team-text">
-              <h4>Team Member Name</h4>
-              <small>Team Member Name</small>
-              <a href="#">Read More <i class="fa-solid fa-arrow-right"></i> </a>
-            </div>
-          </div>
-          <div class="home-team-box">
-            <div class="home-team-img">
-              <img src="img/profileimg.png" alt="" />
-            </div>
-            <div class="home-team-text">
-              <h4>Team Member Name</h4>
-              <small>Team Member Name</small>
-              <a href="#">Read More <i class="fa-solid fa-arrow-right"></i> </a>
-            </div>
-          </div>
-          <div class="home-team-box">
-            <div class="home-team-img">
-              <img src="img/profileimg.png" alt="" />
-            </div>
-            <div class="home-team-text">
-              <h4>Team Member Name</h4>
-              <small>Team Member Name</small>
-              <a href="#">Read More <i class="fa-solid fa-arrow-right"></i> </a>
-            </div>
-          </div>
-          <div class="home-team-box">
-            <div class="home-team-img">
-              <img src="img/profileimg.png" alt="" />
-            </div>
-            <div class="home-team-text">
-              <h4>Team Member Name</h4>
-              <small>Team Member Name</small>
-              <a href="#">Read More <i class="fa-solid fa-arrow-right"></i> </a>
-            </div>
-          </div>
-          <div class="home-team-box">
-            <div class="home-team-img">
-              <img src="img/profileimg.png" alt="" />
-            </div>
-            <div class="home-team-text">
-              <h4>Team Member Name</h4>
-              <small>Team Member Name</small>
-              <a href="#">Read More <i class="fa-solid fa-arrow-right"></i> </a>
-            </div>
-          </div>
-          <div class="home-team-box">
-            <div class="home-team-img">
-              <img src="img/profileimg.png" alt="" />
-            </div>
-            <div class="home-team-text">
-              <h4>Team Member Name</h4>
-              <small>Team Member Name</small>
-              <a href="#">Read More <i class="fa-solid fa-arrow-right"></i> </a>
-            </div>
-          </div>
-        </div>
+
+          <?php } ?>
+
+         </div>
       </div>
     </div>
 
@@ -599,125 +542,49 @@
         </div>
 
         <div class="home-review-content">
+        <?php 
+    
+    $obj->select('review', '*', null, null, null, null);
+    $result = $obj->getResult();
+   
+
+      foreach ($result as $row) {
+      ?>
+
           <div class="home-review-slide">
-            <div class="home-review-box">
+            <div class="home-review-box"> 
               <div class="review-star">
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
+
+              <?php
+               $start = 1;
+                while ($start <= 5) {
+                  if($row['stars'] < $start){
+                    ?>
+                        <i class="fa-regular fa-star"></i>
+                    <?php
+                  }else{
+                    ?>
+                      <i class="fa-solid fa-star"></i>
+                    <?php
+                  }
+                  $start++;
+                }
+              ?> 
               </div>
-
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-                in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-                nulla pariatur.
-              </p>
-
+                <p><?php echo $row['description'];?></p>
               <div class="home-review-box-profile d-flex align-items-center">
                 <div class="home-review-box-profile-left">
-                  <img src="img/profileimg.png" alt="img" />
+                  <img src="<?php echo "./uploade-images/" .$row['image']; ?>" alt="img" />
                 </div>
                 <div class="home-review-box-profile-right">
-                  <h5>Mohammad Khalil</h5>
-                  <small>21-11-2023</small>
+                  <h5><?php echo $row['name'];?></h5>
+                  <small><?php echo $row['date'];?></small>
                 </div>
               </div>
             </div>
           </div>
-          <div class="home-review-slide">
-            <div class="home-review-box">
-              <div class="review-star">
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-              </div>
+<?php }?>
 
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-                in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-                nulla pariatur.
-              </p>
-
-              <div class="home-review-box-profile d-flex align-items-center">
-                <div class="home-review-box-profile-left">
-                  <img src="img/profileimg.png" alt="img" />
-                </div>
-                <div class="home-review-box-profile-right">
-                  <h5>Mohammad Khalil</h5>
-                  <small>21-11-2023</small>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="home-review-slide">
-            <div class="home-review-box">
-              <div class="review-star">
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-              </div>
-
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-                in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-                nulla pariatur.
-              </p>
-
-              <div class="home-review-box-profile d-flex align-items-center">
-                <div class="home-review-box-profile-left">
-                  <img src="img/profileimg.png" alt="img" />
-                </div>
-                <div class="home-review-box-profile-right">
-                  <h5>Mohammad Khalil</h5>
-                  <small>21-11-2023</small>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="home-review-slide">
-            <div class="home-review-box">
-              <div class="review-star">
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-              </div>
-
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-                in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-                nulla pariatur.
-              </p>
-
-              <div class="home-review-box-profile d-flex align-items-center">
-                <div class="home-review-box-profile-left">
-                  <img src="img/profileimg.png" alt="img" />
-                </div>
-                <div class="home-review-box-profile-right">
-                  <h5>Mohammad Khalil</h5>
-                  <small>21-11-2023</small>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </div>
@@ -745,41 +612,18 @@
         </div>
 
         <div class="home-partner-content">
+                <?php 
+                $obj->select('partner_admission', '*', null, null, null, null);
+                $result = $obj->getResult();
+                $first = true;
+                foreach ($result as $row) {
+                ?>
           <div class="partner-box-slide">
             <div class="home-partner-box">
-              <img src="img/company.png" alt="img" />
+              <img src="<?php echo "./uploade-images/" .$row['image']; ?>" alt="img" />
             </div>
           </div>
-          <div class="partner-box-slide">
-            <div class="home-partner-box">
-              <img src="img/company.png" alt="img" />
-            </div>
-          </div>
-          <div class="partner-box-slide">
-            <div class="home-partner-box">
-              <img src="img/company.png" alt="img" />
-            </div>
-          </div>
-          <div class="partner-box-slide">
-            <div class="home-partner-box">
-              <img src="img/company.png" alt="img" />
-            </div>
-          </div>
-          <div class="partner-box-slide">
-            <div class="home-partner-box">
-              <img src="img/company.png" alt="img" />
-            </div>
-          </div>
-          <div class="partner-box-slide">
-            <div class="home-partner-box">
-              <img src="img/company.png" alt="img" />
-            </div>
-          </div>
-          <div class="partner-box-slide">
-            <div class="home-partner-box">
-              <img src="img/company.png" alt="img" />
-            </div>
-          </div>
+          <?php } ?>
         </div>
       </div>
     </div>

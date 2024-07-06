@@ -163,35 +163,35 @@ if (isset($_POST['submit'])) {
     <div class="home-contact">
       <div class="container">
         <div class="home-contact-content grid-2">
-          <div class="home-contact-right">
+        <div class="home-contact-right">
             <h2>Contact Information</h2>
             <h4>We are open for any suggestions or just a chat</h4>
 
             <div class="home-contact-right-box">
               <div class="home-contact-right-box-left">
-                <i class="fa-solid fa-location-dot"></i>
+              <i class="fa-solid fa-envelope"></i>
               </div>
               <div class="home-contact-right-box-right">
-                <h5>Address</h5>
-                <small>Zindabazar Point, Sylhet City, Bangladesh</small>
+                <h5>Email</h5>
+                <small>educationtwosuccess@gmail.com</small>
               </div>
             </div>
             <div class="home-contact-right-box">
               <div class="home-contact-right-box-left">
-                <i class="fa-solid fa-location-dot"></i>
+                <i class="fa-solid fa-phone"></i>
               </div>
               <div class="home-contact-right-box-right">
-                <h5>Address</h5>
-                <small>Zindabazar Point, Sylhet City, Bangladesh</small>
+                <h5>Phone</h5>
+                <small>01788475158</small>
               </div>
             </div>
             <div class="home-contact-right-box">
               <div class="home-contact-right-box-left">
-                <i class="fa-solid fa-location-dot"></i>
+              <i class="fa-solid fa-globe"></i>
               </div>
               <div class="home-contact-right-box-right">
-                <h5>Address</h5>
-                <small>Zindabazar Point, Sylhet City, Bangladesh</small>
+                <h5>Website</h5>
+                <small>education.com</small>
               </div>
             </div>
             <div class="home-contact-right-box">

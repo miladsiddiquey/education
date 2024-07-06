@@ -149,8 +149,8 @@
 
         <div class="top-banner-content text-center">
           <div class="top-banner-btn d-flex gap-4 justify-content-center">
-            <a href="#" class="btn-main">Register For IELTS</a>
-            <a href="#" class="btn-white">Contact Our Team</a>
+            <a href="./university-page.php" class="btn-main">View University</a>
+            <a href="./contact.php" class="btn-white">Contact Our Team</a>
           </div>
         </div>
       </div>
@@ -159,152 +159,46 @@
     <!-- =================== top banner ewnd======================= -->
 
     <!-- ===================== home destination ==================== -->
+     <!-- Button trigger modal -->
+
 
     <div class="home-destination">
       <div class="container">
         <div class="section-header"></div>
 
         <div class="home-destination-content grid-3">
+
+          <?php
+          include "./database/database.php";
+          $obj = new Database();
+
+          $obj->select('destinationpost', '*', null, null, null, null);
+          $result = $obj->getResult();
+
+            foreach ($result as $row) {
+            ?>
           <div class="home-destination-slide">
             <div class="card-box">
               <div class="card-box-img">
-                <img src="img/post1.png" alt="img" />
+                <img src="<?php echo "./uploade-images/" .$row['image']; ?>" alt="img" />
               </div>
               <div class="card-box-text">
-                <h4>Study in AUSTRALIA</h4>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore.
-                </p>
-                <a href="#"
-                  >Learn More <i class="fa-solid fa-arrow-right"></i
+                <h4><?php echo $row['title']; ?></h4>
+                <p><?php echo $row['paragraph']; ?> </p>
+                <a href="./destination_single.php?id=<?php echo $row['id'];?>">Learn More <i class="fa-solid fa-arrow-right"></i
                 ></a>
               </div>
             </div>
           </div>
-          <div class="home-destination-slide">
-            <div class="card-box">
-              <div class="card-box-img">
-                <img src="img/post1.png" alt="img" />
-              </div>
-              <div class="card-box-text">
-                <h4>Study in AUSTRALIA</h4>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore.
-                </p>
-                <a href="#"
-                  >Learn More <i class="fa-solid fa-arrow-right"></i
-                ></a>
-              </div>
-            </div>
-          </div>
-          <div class="home-destination-slide">
-            <div class="card-box">
-              <div class="card-box-img">
-                <img src="img/post1.png" alt="img" />
-              </div>
-              <div class="card-box-text">
-                <h4>Study in AUSTRALIA</h4>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore.
-                </p>
-                <a href="#"
-                  >Learn More <i class="fa-solid fa-arrow-right"></i
-                ></a>
-              </div>
-            </div>
-          </div>
-          <div class="home-destination-slide">
-            <div class="card-box">
-              <div class="card-box-img">
-                <img src="img/post1.png" alt="img" />
-              </div>
-              <div class="card-box-text">
-                <h4>Study in AUSTRALIA</h4>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore.
-                </p>
-                <a href="#"
-                  >Learn More <i class="fa-solid fa-arrow-right"></i
-                ></a>
-              </div>
-            </div>
-          </div>
-          <div class="home-destination-slide">
-            <div class="card-box">
-              <div class="card-box-img">
-                <img src="img/post1.png" alt="img" />
-              </div>
-              <div class="card-box-text">
-                <h4>Study in AUSTRALIA</h4>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore.
-                </p>
-                <a href="#"
-                  >Learn More <i class="fa-solid fa-arrow-right"></i
-                ></a>
-              </div>
-            </div>
-          </div>
-          <div class="home-destination-slide">
-            <div class="card-box">
-              <div class="card-box-img">
-                <img src="img/post1.png" alt="img" />
-              </div>
-              <div class="card-box-text">
-                <h4>Study in AUSTRALIA</h4>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore.
-                </p>
-                <a href="#"
-                  >Learn More <i class="fa-solid fa-arrow-right"></i
-                ></a>
-              </div>
-            </div>
-          </div>
-          <div class="home-destination-slide">
-            <div class="card-box">
-              <div class="card-box-img">
-                <img src="img/post1.png" alt="img" />
-              </div>
-              <div class="card-box-text">
-                <h4>Study in AUSTRALIA</h4>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore.
-                </p>
-                <a href="#"
-                  >Learn More <i class="fa-solid fa-arrow-right"></i
-                ></a>
-              </div>
-            </div>
-          </div>
-          <div class="home-destination-slide">
-            <div class="card-box">
-              <div class="card-box-img">
-                <img src="img/post1.png" alt="img" />
-              </div>
-              <div class="card-box-text">
-                <h4>Study in AUSTRALIA</h4>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore.
-                </p>
-                <a href="#"
-                  >Learn More <i class="fa-solid fa-arrow-right"></i
-                ></a>
-              </div>
-            </div>
-          </div>
+          <?php } ?>   
+
+          
         </div>
+
+        
       </div>
     </div>
-
+    
     <!-- ===================== home destination end==================== -->
 
     <!-- ============================== footer -----------------------------==== -->

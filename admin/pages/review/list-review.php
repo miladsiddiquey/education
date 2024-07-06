@@ -34,7 +34,7 @@
                           <?php 
                     include "../../../database/database.php";
                     $obj = new Database();
-                    $limit = 2;
+                    $limit = 5;
                     $obj->select('review', '*', null, null, null, $limit);
                     $result = $obj->getResult();
                     foreach ($result as $row) {

@@ -42,7 +42,7 @@
                           <tr>
                             <td> <?php echo $row['id']; ?> </td>
                             <td> <?php echo $row['question']; ?> </td>
-                            <td><?php echo $row['answer']; ?> </td>
+                            <td><?php echo substr($row['answer'],0,60); ?> </td>
                             <td> 
                             <a href="./edit-faq.php ?id=<?php echo $row['id'];?>" style="font-size: 20px; padding-right: 10px;"><i class="mdi mdi-lead-pencil"></i></a>
                             <a onclick="return confirm('Are you sure!')" href="./delate-faq.php ?id=<?php echo $row['id'];?>" style="font-size: 20px; padding-left: 10px;"><i class="mdi mdi-delete"></i></a>
